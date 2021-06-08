@@ -5,6 +5,7 @@ import Login from "./Login"
 import useToken from "../Hooks/useToken"
 const Add = () => {
   // const [token, setToken] = useState();
+  // eslint-disable-next-line 
   const [addError, setAddError] = useState("");
   const [addBook, setAddBook] = useState({
     title: "",
@@ -161,6 +162,9 @@ const ButWrap = styled.div`
   /* align-items: flex-end; */
   justify-content: flex-end;
   /* align-content: flex-end; */
+  @media (max-width: 619px) {
+    width:300px;
+  }
 `;
 
 const InputGrid = styled.div`
@@ -168,6 +172,9 @@ const InputGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   margin-bottom: 15px;
+  @media (max-width: 619px) {
+    grid-template-columns: 1fr;
+  }
 `;
 const TextArea = styled.textarea`
   max-width: 100%;
@@ -210,6 +217,9 @@ const FormWrap = styled.form`
   width: 600px;
   justify-content: center;
   margin: 30px auto;
+  @media (max-width: 619px) {
+    width:300px;
+  }
 `;
 
 export default Add;

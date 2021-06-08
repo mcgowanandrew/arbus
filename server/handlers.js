@@ -49,9 +49,7 @@ const addBook = async (req, res) => {
     assert.strictEqual(1, result.insertedCount);
     res.status(201).json({
       status: 201,
-      data: 
-      result
-      
+      data: result,
     });
     client.close();
     console.log("disconnected");
@@ -97,9 +95,7 @@ const addSubmission = async (req, res) => {
     assert.strictEqual(1, result.insertedCount);
     res.status(201).json({
       status: 201,
-      data: 
-      result
-      
+      data: result,
     });
     client.close();
     console.log("disconnected");
@@ -119,7 +115,6 @@ const getAllSubmissions = async (req, res) => {
     res.status(500).json({ status: 500, message: "Didn't work 🤬" });
   }
 };
-
 
 const getAllBooks = async (req, res) => {
   try {
@@ -151,17 +146,21 @@ const getBookById = async (req, res) => {
 };
 
 const getBooksByPhotographer = async (req, res) => {
-  let photographer = req.params.photographer;
+  let photographer = req.params.photographer
   try {
     const client = await MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("arbus");
-    const result = await db.collection("test2").find({photographer}).toArray();
-    assert(1, result.matchedCount);
-    console.log(photographer);
+    const result = await db
+      .collection("test2")
+      .find({ photographer })
+      .toArray();
+    // assert(1, result.matchedCount);
+    console.log(result);
     client.close();
 
-    res.status(200).json({ status: 200, data: result });
+
+    res.status(201).json({ status: 201, data: result });
   } catch (err) {
     res.status(500).json({ status: 500, message: "Error" });
   }
@@ -187,5 +186,6 @@ module.exports = {
   getBookById,
   getBooksByPhotographer,
   getBookByPublisher,
-  addSubmission,getAllSubmissions
+  addSubmission,
+  getAllSubmissions,
 };

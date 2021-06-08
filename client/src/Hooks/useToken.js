@@ -6,6 +6,7 @@ export default function useToken() {
     const userToken = JSON.parse(tokenString);
     return userToken?.token;
   };
+  // eslint-disable-next-line 
   const [token, setToken] = useState(getToken());
   const saveToken = (userToken) => {
     localStorage.setItem("token", JSON.stringify(userToken));

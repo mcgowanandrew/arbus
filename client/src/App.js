@@ -4,6 +4,9 @@ import GlobalStyles from "./GlobalStyles";
 import Add from "../src/admin/Add";
 import Homepage from "./Homepage";
 import Submissions from "./Submissions"
+import Collection from "./Collection"
+import BookDetails from "./BookDetails"
+import Header from "./Headers/Header"
 
 const App = () => {
 
@@ -11,9 +14,16 @@ const App = () => {
   return (
     <BrowserRouter>
       <GlobalStyles />
+      <Header/>
       <Switch>
         <Route exact path="/">
           <Homepage />
+        </Route>
+        <Route exact path="/catalogue/collection">
+          <Collection/>
+        </Route>
+        <Route exact path="/catalogue/:_id">
+          <BookDetails/>
         </Route>
         <Route exact path="/admin/add">
           <Add />

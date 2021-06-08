@@ -1,36 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import bg from "./assests/bg.jpg";
-import HomeHeader from "./Headers/HomeHeader";
+import AllBooks from "./AllBooks";
 
 const Homepage = () => {
+  const [newBooks, setNewBooks] = useState([]);
+  useEffect(() => {
+    fetch("/catalogue/all-books", { method: "GET" })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log("data", data);
+        const bookArray = Object.values(data)[1];
+        setNewBooks(bookArray.reverse().slice(0, 3));
+      });
+  }, []);
+  // console.log("all",allBooks)
   return (
-    <BigWrap>
-     
-     <HomeHeader />
-      <BgOverlay> </BgOverlay>
-    </BigWrap>
+    <>
+      <BookWrap>
+        {newBooks.map((book) => {
+          return <AllBooks key={book._id} book={book} />;
+        })}
+      </BookWrap>
+    </>
   );
 };
-
-const BgOverlay = styled.div`
-  width: 100vw;
-  height: 110vh;
-  background-color: #000;
-  opacity: 0.3;
-  margin-top: -10vh;
-  position: relative;
-
-`;
-
-const BigWrap = styled.div`
-  background-image: url(${bg});
-  width: 100vw;
-  height: 100vh;
-  background-size: cover;
+const BookWrap = styled.div`
+  margin-top: 15px;
+  display: flex;
+  flex-flow: row wrap;
   justify-content: center;
-  overflow: hidden;
-
+  animation: fadein 1s ease-out;
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 export default Homepage;

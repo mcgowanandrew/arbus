@@ -33,7 +33,8 @@ const Login = ({ setToken }) => {
 
   return (
     <BigWrap>
-      <FormWrap autocomplete="off" method="post" action="..." onSubmit={handleSubmit}>
+      <FormWrap autocomplete="off" onSubmit={handleSubmit}>
+          {/* <Login>Log In</Login> */}
         <InputGrid>
           <Input
             id="name"
@@ -61,6 +62,7 @@ const Login = ({ setToken }) => {
 Login.propTypes = {
   setToken: PropTypes.func.isRequired,
 };
+// const Login = styled.div``
 const ButWrap = styled.div`
   width: 600px;
   display: flex;
@@ -75,6 +77,7 @@ const Button = styled.button`
   background-color: #000;
   color: #fff;
   margin-left: 10px;
+  font-weight: bold;
   &:hover {
     background-color: #fff;
     color: #000;

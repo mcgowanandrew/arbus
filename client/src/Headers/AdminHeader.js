@@ -14,8 +14,7 @@ const AdminHeader = () => {
   };
   return (
     <HeadWrap>
-      <Title>Arbus</Title>
-      <Home>Collection</Home>
+     
       <LogOut onClick={handleLogout}>Log Out</LogOut>
     </HeadWrap>
   );
@@ -31,17 +30,17 @@ const LogOut = styled.div`
     cursor: pointer;
   }
 `;
-const Home = styled.div`
-  color: #000;
-  font-size: 20px;
-  font-family: sans-serif;
-  padding: 20px;
-  &:hover {
-    color: #c25557;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-  }
-`;
+// const Home = styled.div`
+//   color: #000;
+//   font-size: 20px;
+//   font-family: sans-serif;
+//   padding: 20px;
+//   &:hover {
+//     color: #c25557;
+//     transition: all 0.2s ease-in-out;
+//     cursor: pointer;
+//   }
+// `;
 // const LogOut = styled.div`
 //   color: #000;
 //   font-size: 20px;
@@ -53,21 +52,21 @@ const Home = styled.div`
 //     cursor: pointer;
 //   }
 // `;
-const Title = styled.div`
-  color: #000;
-  font-size: 20px;
-  font-family: sans-serif;
-  padding: 20px;
-  &:hover {
-    color: #c25557;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-  }
-`;
+// const Title = styled.div`
+//   color: #000;
+//   font-size: 20px;
+//   font-family: sans-serif;
+//   padding: 20px;
+//   &:hover {
+//     color: #c25557;
+//     transition: all 0.2s ease-in-out;
+//     cursor: pointer;
+//   }
+// `;
 
 const HeadWrap = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: flex-end;
   position: relative;
   z-index: 10;
