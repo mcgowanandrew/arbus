@@ -16,7 +16,7 @@ export default createGlobalStyle`
   input, button, select, option,
   h1, h2, h3, h4, h5, h6, p,
   text {
-    font-family:  sans-serif;
+    font-family: 'DM Sans', sans-serif;
    
   }
 
@@ -83,6 +83,10 @@ export default createGlobalStyle`
 a{
     text-decoration: none;
 }
+/* a:focus{
+    text-decoration: underline;
+    color:#000;
+} */
   html, body {
       /* max-width: 100vw;
       font-size: 10px; */

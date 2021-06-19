@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-import Login from "./Login";
-import useToken from "../Hooks/useToken";
+// import { combineReducers } from "redux";
+// import daido from "../assests/daido.jpg";
 
-const Edit = () => {
+const SubDetails = () => {
   let history = useHistory();
   const { _id } = useParams();
   const [error, setError] = useState();
-  const [currentBook, setCurrentBook] = useState([]);
-  const [updateBook, setUpdateBook] = useState({
+  const [currentSub, setCurrentSub] = useState([]);
+  const [approve, setApprove] = useState({
     title: "",
     photographer: "",
     size: "",
@@ -24,63 +24,21 @@ const Edit = () => {
     extraDetails: "",
     bookCover: "",
   });
-
   useEffect(() => {
-    fetch(`/edit/${_id}`)
+    fetch(`/admin/sub/edit/${_id}`)
       .then((rest) => rest.json())
       .then((json) => {
-        setCurrentBook({ ...json.data });
+        setCurrentSub({...json.data});
       });
   }, []);
-
-  const cb = currentBook;
-  useEffect(() => {
-    if (cb.title) {
-      setUpdateBook({ ...cb, title: cb.title });
-    }
-    if (cb.photographer) {
-      setUpdateBook({ ...cb, photographer: cb.photographer });
-    }
-    if (cb.size) {
-      setUpdateBook({ ...cb, size: cb.size });
-    }
-    if (cb.pages) {
-      setUpdateBook({ ...cb, pages: cb.pages });
-    }
-    if (cb.edition) {
-      setUpdateBook({ ...cb, edition: cb.edition });
-    }
-    if (cb.editionSize) {
-      setUpdateBook({ ...cb, editionSize: cb.editionSize });
-    }
-    if (cb.publisher) {
-      setUpdateBook({ ...cb, publisher: cb.publisher });
-    }
-    if (cb.language) {
-      setUpdateBook({ ...cb, language: cb.language });
-    }
-    if (cb.printing) {
-      setUpdateBook({ ...cb, printing: cb.printing });
-    }
-    if (cb.extraDetails) {
-      setUpdateBook({ ...cb, extraDetails: cb.extraDetails });
-    }
-    if (cb.images) {
-      setUpdateBook({ ...cb, images: cb.images });
-    }
-  }, [cb]);
-
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setUpdateBook({ ...updateBook, [name]: value });
-  };
+  console.log("data", currentSub);
+  const cs = currentSub;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`/catalogue/update/${_id}`, {
-      method: "PATCH",
-      body: JSON.stringify({ ...updateBook }),
+    fetch("/admin/add", {
+      method: "POST",
+      body: JSON.stringify({ ...approve }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -90,40 +48,67 @@ const Edit = () => {
       .catch((error) => {
         setError("error");
       });
-    history.push(`/catalogue/${_id}`);
-    history.go(0);
-  };
+      history.push("/catalogue/collection");
+      };
 
-  const handleCancel = (e) => {
+  const deleteSubHandler = (e) => {
     e.preventDefault();
-    history.push(`/catalogue/${_id}`);
+    fetch(`/admin/sub/${_id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .catch((error) => {
+        setError("error");
+      });
+
+    history.push("/admin/all-submissions");
   };
 
-  const convertBase64 = (file) => {
-    return new Promise((res, rej) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
+  const handleChange = (e, type) => {
+    const name = e.target.name;
+    const value = e.target.value;
 
-      fileReader.onload = () => {
-        res(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        rej(error);
-      };
-    });
+    setApprove({ ...approve, [name]: value });
   };
 
-  const uploadImage = async (e) => {
-    const file = e.target.files[0];
-    const base64 = await convertBase64(file);
-    setUpdateBook({ ...updateBook, images: base64 });
-  };
-
-  const { token, setToken } = useToken();
-  if (!token) {
-    return <Login setToken={setToken} />;
-  }
+  useEffect(() => {
+    if (cs.title) {
+      setApprove({ ...cs, title: cs.title });
+    }
+    if (cs.photographer) {
+      setApprove({ ...cs, photographer: cs.photographer });
+    }
+    if (cs.size) {
+      setApprove({ ...cs, size: cs.size });
+    }
+    if (cs.pages) {
+      setApprove({ ...cs, pages: cs.pages });
+    }
+    if (cs.edition) {
+      setApprove({ ...cs, edition: cs.edition });
+    }
+    if (cs.editionSize) {
+      setApprove({ ...cs, editionSize: cs.editionSize });
+    }
+    if (cs.publisher) {
+      setApprove({ ...cs, publisher: cs.publisher });
+    }
+    if (cs.language) {
+      setApprove({ ...cs, language: cs.language });
+    }
+    if (cs.printing) {
+      setApprove({ ...cs, printing: cs.printing });
+    }
+    if (cs.extraDetails) {
+      setApprove({ ...cs, extraDetails: cs.extraDetails });
+    } if (cs.images) {
+        setApprove({ ...cs, images: cs.images });
+      }
+  }, [cs]);
   return (
     <BigWrap>
       <FormWrap autocomplete="off">
@@ -133,7 +118,7 @@ const Edit = () => {
             placeholder="Title"
             type="text"
             name="title"
-            defaultValue={cb.title}
+            defaultValue={cs.title}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -141,7 +126,7 @@ const Edit = () => {
             placeholder="Photographer"
             type="text"
             name="photographer"
-            defaultValue={cb.photographer}
+            defaultValue={cs.photographer}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -149,7 +134,7 @@ const Edit = () => {
             placeholder="Size"
             type="text"
             name="size"
-            defaultValue={cb.size}
+            defaultValue={cs.size}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -157,7 +142,7 @@ const Edit = () => {
             placeholder="Pages"
             type="text"
             name="pages"
-            defaultValue={cb.pages}
+            defaultValue={cs.pages}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -165,7 +150,7 @@ const Edit = () => {
             placeholder="Edition"
             type="text"
             name="edition"
-            defaultValue={cb.edition}
+            defaultValue={cs.edition}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -173,7 +158,7 @@ const Edit = () => {
             placeholder="Edition Size"
             type="text"
             name="editionSize"
-            defaultValue={cb.editionSize}
+            defaultValue={cs.editionSize}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -181,7 +166,7 @@ const Edit = () => {
             placeholder="Publication Date"
             type="text"
             name="publicationDate"
-            defaultValue={cb.publicationDate}
+            defaultValue={cs.publicationDate}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -189,7 +174,7 @@ const Edit = () => {
             placeholder="Publisher"
             type="text"
             name="publisher"
-            defaultValue={cb.publisher}
+            defaultValue={cs.publisher}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -197,7 +182,7 @@ const Edit = () => {
             placeholder="Language"
             type="text"
             name="language"
-            defaultValue={cb.language}
+            defaultValue={cs.language}
             onChange={(e) => handleChange(e)}
           />
           <Input
@@ -205,15 +190,8 @@ const Edit = () => {
             placeholder="Printing"
             type="text"
             name="printing"
-            defaultValue={cb.printing}
+            defaultValue={cs.printing}
             onChange={(e) => handleChange(e)}
-          />
-          <Input
-            id="image"
-            type="file"
-            onChange={(e) => {
-              uploadImage(e);
-            }}
           />
         </InputGrid>
         <TextArea
@@ -222,32 +200,17 @@ const Edit = () => {
           wrap="hard"
           type="text"
           name="extraDetails"
-          defaultValue={cb.extraDetails}
+          defaultValue={cs.extraDetails}
           onChange={(e) => handleChange(e)}
         />
         <ButWrap>
-          <Button onClick={(e) => handleSubmit(e)}>Update</Button>
-          <Button onClick={(e) => handleCancel(e)}>Cancel</Button>
-
-          <DelButton>Delete</DelButton>
+          <Button onClick={(e) => handleSubmit(e)}>Add Book</Button>
+          <DelButton onClick={deleteSubHandler}>Delete</DelButton>
         </ButWrap>
       </FormWrap>
     </BigWrap>
   );
 };
-const DelButton = styled.button`
-  border: 2px solid #f00;
-  padding: 5px;
-  background-color: #f00;
-  color: #fff;
-  margin-left: 10px;
-  &:hover {
-    background-color: #fff;
-    color: #000;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-`;
 const ButWrap = styled.div`
   width: 600px;
   display: flex;
@@ -275,6 +238,20 @@ const TextArea = styled.textarea`
   padding: 5px;
   :focus {
     outline: none;
+  }
+`;
+
+const DelButton = styled.button`
+  border: 2px solid #f00;
+  padding: 5px;
+  background-color: #f00;
+  color: #fff;
+  margin-left: 10px;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
 `;
 const Button = styled.button`
@@ -311,4 +288,5 @@ const FormWrap = styled.form`
     width: 300px;
   }
 `;
-export default Edit;
+
+export default SubDetails;

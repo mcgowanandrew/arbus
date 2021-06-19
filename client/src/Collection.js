@@ -15,7 +15,6 @@ useEffect(()=>{
         setAllBooks(bookArray.reverse())
     })
 },[])
-// console.log("all",allBooks)
     return(<><BookWrap>{allBooks.map((book)=>{
         return <AllBooks key={book._id} book={book}/>
     })}</BookWrap></>)

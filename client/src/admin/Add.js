@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import AdminHeader from "../Headers/AdminHeader"
-import Login from "./Login"
-import useToken from "../Hooks/useToken"
+import Login from "./Login";
+import useToken from "../Hooks/useToken";
 const Add = () => {
   // const [token, setToken] = useState();
-  // eslint-disable-next-line 
+  // eslint-disable-next-line
   const [addError, setAddError] = useState("");
   const [addBook, setAddBook] = useState({
     title: "",
@@ -21,8 +20,12 @@ const Add = () => {
     printing: "",
     extraDetails: "",
     bookCover: "",
+    imageTwo: "",
+    imageThree:"",
+    imageFour:"",
   });
-  const {token,setToken}=useToken()
+  const { token, setToken } = useToken();
+  
   if (!token) {
     return <Login setToken={setToken} />;
   }
@@ -48,15 +51,52 @@ const Add = () => {
       });
     handleClear();
   };
+
   const handleClear = () => {
     document
       .querySelectorAll("input,textarea")
       .forEach((input) => (input.value = ""));
   };
+
+  const convertBase64 = (file) => {
+    return new Promise((res, rej) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        res(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        rej(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setAddBook({ ...addBook, images: base64 });
+  };
+  const uploadImageTwo = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setAddBook({ ...addBook, imageTwo: base64 });
+  };
+  const uploadImageThree = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setAddBook({ ...addBook, imageThree: base64 });
+  };
+  const uploadImageFour = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setAddBook({ ...addBook, imageFour: base64 });
+  };
+
   return (
     <BigWrap>
-      <AdminHeader/>
-      <FormWrap autocomplete="off" method="post" action="...">
+      <FormWrap autocomplete="off">
         <InputGrid>
           <Input
             id="title"
@@ -138,6 +178,47 @@ const Add = () => {
             value={addBook.printing}
             onChange={(e) => handleChange(e)}
           />
+          <Wrap>
+            <Text> Cover: </Text>{" "}
+            <input
+              id="image"
+              type="file" 
+              onChange={(e) => {
+                uploadImage(e);
+              }}
+              required/>
+          </Wrap>
+
+          <Wrap>
+            <Text> Spread One: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageTwo(e);
+              }}
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread Two: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageThree(e);
+              }}
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread Three: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageFour(e);
+              }}
+            />
+          </Wrap>
         </InputGrid>
         <TextArea
           id="extraDetails"
@@ -156,6 +237,17 @@ const Add = () => {
     </BigWrap>
   );
 };
+const Text = styled.span`
+  font-weight: 500;
+  font-size: 18px;
+`;
+const Wrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
 const ButWrap = styled.div`
   width: 600px;
   display: flex;
@@ -163,7 +255,7 @@ const ButWrap = styled.div`
   justify-content: flex-end;
   /* align-content: flex-end; */
   @media (max-width: 619px) {
-    width:300px;
+    width: 300px;
   }
 `;
 
@@ -218,7 +310,7 @@ const FormWrap = styled.form`
   justify-content: center;
   margin: 30px auto;
   @media (max-width: 619px) {
-    width:300px;
+    width: 300px;
   }
 `;
 

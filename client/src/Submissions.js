@@ -20,6 +20,9 @@ const Submissions = () => {
     printing: "",
     extraDetails: "",
     bookCover: "",
+    imageTwo: "",
+    imageThree:"",
+    imageFour:"",
   });
 
   const handleChange = (e) => {
@@ -49,7 +52,45 @@ const Submissions = () => {
       .querySelectorAll("input,textarea")
       .forEach((input) => (input.value = ""));
   };
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
 
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    // setCurrentImage(base64);
+    setAddBook({ ...addBook, images: base64 });
+  };
+  const uploadImageTwo = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    // setCurrentImage(base64);
+    setAddBook({ ...addBook, imageTwo: base64 });
+  };
+  const uploadImageThree = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    // setCurrentImage(base64);
+    setAddBook({ ...addBook, imageThree: base64 });
+  };
+  const uploadImageFour = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    // setCurrentImage(base64);
+    setAddBook({ ...addBook, imageFour: base64 });
+  };
   return (
     <BigWrap>
       <Wrap>
@@ -61,6 +102,7 @@ const Submissions = () => {
               type="text"
               name="title"
               value={addBook.title}
+              required
               onChange={(e) => handleChange(e)}
             />
             <Input
@@ -69,6 +111,7 @@ const Submissions = () => {
               type="text"
               name="photographer"
               value={addBook.photographer}
+              required
               onChange={(e) => handleChange(e)}
             />
             <Input
@@ -135,6 +178,47 @@ const Submissions = () => {
               value={addBook.printing}
               onChange={(e) => handleChange(e)}
             />
+                <Wrap2>
+            <Text> Cover: </Text>{" "}
+            <input
+              id="image"
+              type="file" 
+              required
+              onChange={(e) => {
+                uploadImage(e);
+              }}
+              />
+          </Wrap2>
+          <Wrap2>
+            <Text> Spread One: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageTwo(e);
+              }}
+            />
+          </Wrap2>
+          <Wrap2>
+            <Text> Spread Two: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageThree(e);
+              }}
+            />
+          </Wrap2>
+          <Wrap2>
+            <Text> Spread Three: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageFour(e);
+              }}
+            />
+          </Wrap2>
           </InputGrid>
           <TextArea
             id="extraDetails"
@@ -145,21 +229,16 @@ const Submissions = () => {
             value={addBook.extraDetails}
             onChange={(e) => handleChange(e)}
           />
+       
         </FormWrap>
         <FootWrap>
           <GuideBtn onClick={() => setIsOpen(true)}>Guidelines</GuideBtn>
-
           <ButWrap>
-            {/* <details>
-          <summary>Submission guidelines:</summary>
-          <p>i'll fill this out later</p>
-      </details> */}
             <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
             <Button onClick={handleClear}>Reset</Button>
           </ButWrap>
         </FootWrap>
         <GuidelineModal open={isOpen}>
-            {/* <ScaleOut> */}
           <Guidelines>
             <X onClick={() => setIsOpen(false)}>X</X>
             <span>
@@ -185,6 +264,18 @@ const Submissions = () => {
     </BigWrap>
   );
 };
+
+const Text = styled.span`
+  font-weight: 500;
+  font-size: 18px;
+`;
+const Wrap2 = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
 const X = styled.div`
   border: 2px solid #000;
   padding: 5px;

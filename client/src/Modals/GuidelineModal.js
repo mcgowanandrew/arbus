@@ -1,27 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-// import ModalContext from "../Modals/ModalContext";
-// import ScaleIn from "../Spring/ScaleIn";
-// import ScaleOut from "../Spring/ScaleOut";
 
-const GuidelineModal = ({ open,children }) => {
-//   const { isOpen } = useContext(ModalContext);
-if(!open){
+
+const GuidelineModal = ({ open, children }) => {
+  //   const { isOpen } = useContext(ModalContext);
+  if (!open) {
     return null;
-}
+  }
   return (
     <Overlay>
-      {/* {!isOpen ? (
-        <ScaleIn> */}
-          {/* <ModalDiv isToggled={isOpen}>{children}</ModalDiv> */}
-        {/* </ScaleIn>
-      ) : (
-        <ScaleOut>
-          <ModalDiv isToggled={isOpen}>{children}</ModalDiv>
-        </ScaleOut>
-      )} */}
-                <ModalDiv>{children}</ModalDiv>
-
+      <ModalDiv>{children}</ModalDiv>
     </Overlay>
   );
 };
@@ -33,6 +21,8 @@ const Overlay = styled.div`
   left: 0;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 1000;
+  transition: all 1s ease-out;
+
   animation: fadein 0.5s ease-out;
   @keyframes fadein {
     0% {
@@ -52,6 +42,7 @@ const ModalDiv = styled.div`
   background-color: #fff;
   z-index: 1000;
   width: 600px;
+  transition: all 1s ease-out;
   animation: fadein 1s ease-out;
   @keyframes fadein {
     0% {

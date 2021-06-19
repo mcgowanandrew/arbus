@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+// const refreshPage =()=>{
+//   let location=useLocation()
+//   useEfffect(()=>{
+//     ga.send(["pageview",location.pathname])
+//   },[location])
+// }
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-
+  const history = useHistory();
   const loginUser = (credentials) => {
     return fetch("http://localhost:4000/admin/login", {
       method: "POST",
@@ -16,7 +22,7 @@ const Login = ({ setToken }) => {
       body: JSON.stringify(credentials),
     }).then((data) => data.json());
   };
-//   let history = useHistory();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = await loginUser({
@@ -24,8 +30,9 @@ const Login = ({ setToken }) => {
       password,
     });
     setToken(token);
-    window.location.reload();
-};
+    history.go(0);
+    // window.location.reload();
+  };
   const handleChange = (e) => {
     setUsername(e.target.value);
     setPassword(e.target.value);
@@ -34,7 +41,6 @@ const Login = ({ setToken }) => {
   return (
     <BigWrap>
       <FormWrap autocomplete="off" onSubmit={handleSubmit}>
-          {/* <Login>Log In</Login> */}
         <InputGrid>
           <Input
             id="name"
@@ -62,13 +68,10 @@ const Login = ({ setToken }) => {
 Login.propTypes = {
   setToken: PropTypes.func.isRequired,
 };
-// const Login = styled.div``
 const ButWrap = styled.div`
   width: 600px;
   display: flex;
-  /* align-items: flex-end; */
   justify-content: flex-end;
-  /* align-content: flex-end; */
 `;
 
 const Button = styled.button`
@@ -106,7 +109,6 @@ const FormWrap = styled.form`
   flex-direction: column;
   width: 600px;
   justify-content: center;
-  /* align-items: center; */
   margin: 30px auto;
 `;
 export default Login;

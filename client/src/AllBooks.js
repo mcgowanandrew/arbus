@@ -1,47 +1,64 @@
 import React from "react";
 import styled from "styled-components";
-import daido from "./assests/daido.jpg";
-import {useHistory} from "react-router-dom"
-
-// import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import useToken from "./Hooks/useToken";
 
 const Book = ({ book }) => {
-let history=useHistory()
+  const { token, setToken } = useToken();
 
-const handleDetailsClick = (e)=>{
-    history.push(`/catalogue/${book._id}`)
-}
+  let history = useHistory();
 
-return (
-    // to={`/catalogue/${book._id}`}
+  const handleDetailsClick = (e) => {
+    e.preventDefault();
+    history.push(`/catalogue/${book._id}`);
+  };
+  const handleEditClick = (e) => {
+    e.preventDefault();
+    history.push(`/edit/${book._id}`);
+  };
+
+  return (
     <BookWrap key={book._id}>
-      <BookCover src={`${daido}`} />
+      <BookCover src={book.images} alt={book.title} />
       <Hover>
         <TitleWrap>
           <Title>{book.title}</Title>
           <Tog>{book.photographer}</Tog>
         </TitleWrap>
-        <ButWrap>
-          <Button onClick={handleDetailsClick}>Details</Button>
-        </ButWrap>
+
+        {token ? (
+          <>
+            <ButWrap>
+              <Button onClick={handleDetailsClick}>Details</Button>
+              <Button onClick={handleEditClick}>Edit</Button>
+            </ButWrap>
+          </>
+        ) : (
+          <Deet>
+            <Button onClick={handleDetailsClick}>Details</Button>{" "}
+          </Deet>
+        )}
       </Hover>
-      {/* <Title>{book.title}</Title> */}
     </BookWrap>
   );
 };
-const ButWrap = styled.div`
-width:100%;
-display: flex;
-justify-content: center;
+const Deet = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
   align-content: flex-end;
-
+`;
+const ButWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: flex-end;
 `;
 const Button = styled.button`
   border: 2px solid #000;
   padding: 5px 10px;
   background-color: #000;
   color: #fff;
-  /* margin-left: 10px; */
   font-weight: bold;
 
   &:hover {
@@ -52,16 +69,13 @@ const Button = styled.button`
   }
 `;
 const TitleWrap = styled.div`
-  /* display: flex;
-  flex-direction: column; */
+
 `;
 
 const Hover = styled.div`
   position: absolute;
-  /* margin:0 auto; */
   display: flex;
-  padding:15px;
-
+  padding: 15px;
   flex-direction: column;
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.9);
@@ -70,31 +84,32 @@ const Hover = styled.div`
   z-index: 10;
   opacity: 0;
   &:hover {
+    transition: all 0.5s ease-in-out;
     opacity: 1;
   }
 `;
 
 const Tog = styled.div`
-width:100%`;
+  width: 100%;
+`;
 
 const Title = styled.div`
-width:100%`;
+  width: 100%;
+`;
 
 const BookWrap = styled.div`
   width: 300px;
-  height:auto;
+  height: auto;
   margin: 15px;
   position: relative;
   z-index: 1;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 const BookCover = styled.img`
-  /* position: absolute;
-  z-index: 2; */
   width: 300px;
   height: auto;
-  margin:0 auto;
+  margin: 0 auto;
 `;
 export default Book;
