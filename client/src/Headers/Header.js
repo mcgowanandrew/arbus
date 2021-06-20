@@ -15,22 +15,27 @@ const HomeHeader = ({ allBooks }) => {
     localStorage.clear();
     history.go(0);
   };
-  
+
+  const handleContactClick = (e) => {
+    e.preventDefault()
+    history.push("/contact");
+  };
+
   return (
     <HeadWrap>
       <Link to="/">Arbus</Link>
-        <Link to="/catalogue/collection">Collection</Link>
-        {token ? (
-          <Link to="/admin/all-submissions">View Submissions</Link>
-        ) : (
-          <Link to="/submissions">Submissions</Link>
-        )}
-        <StyledBiSearchAlt2 />
-        {token ? (
-          <LogOut onClick={handleLogOut}>Log Out</LogOut>
-        ) : (
-          <StyledGoMail />
-        )}
+      <Link to="/catalogue/collection">Collection</Link>
+      {token ? (
+        <Link to="/admin/all-submissions">View Submissions</Link>
+      ) : (
+        <Link to="/submissions">Submissions</Link>
+      )}
+      <StyledBiSearchAlt2 />
+      {token ? (
+        <LogOut onClick={handleLogOut}>Log Out</LogOut>
+      ) : (
+        <StyledGoMail onClick={handleContactClick} />
+      )}
     </HeadWrap>
   );
 };

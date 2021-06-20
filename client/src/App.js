@@ -10,6 +10,7 @@ import Header from "./Headers/Header";
 import ViewSubmissions from "./admin/ViewSubmissions";
 import SubDetails from "./admin/SubDetails";
 import Edit from "./admin/Edit"
+import Contact from "./Contact"
 
 const App = () => {
   return (
@@ -40,6 +41,9 @@ const App = () => {
         </Route>
         <Route exact path="/admin/sub/edit/:_id">
           <SubDetails />
+        </Route>
+        <Route exact path="/contact">
+          <Contact/>
         </Route>
       </Switch>
     </BrowserRouter>
