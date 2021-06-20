@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink ,useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
@@ -7,23 +7,37 @@ import useToken from "../Hooks/useToken";
 
 const HomeHeader = ({ allBooks }) => {
   const { token, setToken } = useToken();
-let history = useHistory()
+
+  let history = useHistory();
+
   const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.clear();
-    // window.location.reload();
-    history.go(0) 
+    history.go(0);
   };
   return (
     <HeadWrap>
       <Link to="/">Arbus</Link>
-      <Link to="/catalogue/collection">Collection</Link>
-      {token ? (<Link to="/admin/all-submissions">View Submissions</Link>):(<Link to="/submissions">Submissions</Link>)}
-      <StyledBiSearchAlt2 />
-      {token ? (<LogOut onClick={handleLogOut}>Log Out</LogOut>): (<StyledGoMail />)}
+        
+        <Link to="/catalogue/collection">Collection</Link>
+        {token ? (
+          <Link to="/admin/all-submissions">View Submissions</Link>
+        ) : (
+          <Link to="/submissions">Submissions</Link>
+        )}
+        <StyledBiSearchAlt2 />
+        {token ? (
+          <LogOut onClick={handleLogOut}>Log Out</LogOut>
+        ) : (
+          <StyledGoMail />
+        )}
+     
+    
     </HeadWrap>
   );
 };
+
+
 const LogOut = styled.div`
   color: #000;
   font-size: 20px;

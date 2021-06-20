@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import GuidelineModal from "./Modals/GuidelineModal";
-// import ScaleOut from "./Spring/ScaleOut"
 
 const Submissions = () => {
+  const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [addError, setAddError] = useState("");
+  const [coverImage, setCoverImage] = useState();
+  const [spreadOne, setSpreadOne] = useState();
+  const [spreadTwo, setSpreadTwo] = useState();
+  const [spreadThree, setSpreadThree] = useState();
+
   const [addBook, setAddBook] = useState({
     title: "",
     photographer: "",
@@ -21,8 +27,8 @@ const Submissions = () => {
     extraDetails: "",
     bookCover: "",
     imageTwo: "",
-    imageThree:"",
-    imageFour:"",
+    imageThree: "",
+    imageFour: "",
   });
 
   const handleChange = (e) => {
@@ -51,6 +57,7 @@ const Submissions = () => {
     document
       .querySelectorAll("input,textarea")
       .forEach((input) => (input.value = ""));
+    history.go(0);
   };
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -70,25 +77,25 @@ const Submissions = () => {
   const uploadImage = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
-    // setCurrentImage(base64);
+    setCoverImage(base64);
     setAddBook({ ...addBook, images: base64 });
   };
   const uploadImageTwo = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
-    // setCurrentImage(base64);
+    setSpreadOne(base64);
     setAddBook({ ...addBook, imageTwo: base64 });
   };
   const uploadImageThree = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
-    // setCurrentImage(base64);
+    setSpreadTwo(base64);
     setAddBook({ ...addBook, imageThree: base64 });
   };
   const uploadImageFour = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
-    // setCurrentImage(base64);
+    setSpreadThree(base64);
     setAddBook({ ...addBook, imageFour: base64 });
   };
   return (
@@ -178,48 +185,59 @@ const Submissions = () => {
               value={addBook.printing}
               onChange={(e) => handleChange(e)}
             />
-                <Wrap2>
-            <Text> Cover: </Text>{" "}
-            <input
-              id="image"
-              type="file" 
-              required
-              onChange={(e) => {
-                uploadImage(e);
-              }}
+            <Wrap2>
+              <Text> Cover: </Text>{" "}
+              <input
+                id="image"
+                type="file"
+                required
+                onChange={(e) => {
+                  uploadImage(e);
+                }}
               />
-          </Wrap2>
-          <Wrap2>
-            <Text> Spread One: </Text>{" "}
-            <input
-              id="image"
-              type="file"
-              onChange={(e) => {
-                uploadImageTwo(e);
-              }}
-            />
-          </Wrap2>
-          <Wrap2>
-            <Text> Spread Two: </Text>{" "}
-            <input
-              id="image"
-              type="file"
-              onChange={(e) => {
-                uploadImageThree(e);
-              }}
-            />
-          </Wrap2>
-          <Wrap2>
-            <Text> Spread Three: </Text>{" "}
-            <input
-              id="image"
-              type="file"
-              onChange={(e) => {
-                uploadImageFour(e);
-              }}
-            />
-          </Wrap2>
+            </Wrap2>
+            <Wrap2>
+              <Text> Spread One: </Text>{" "}
+              <input
+                id="image"
+                type="file"
+                onChange={(e) => {
+                  uploadImageTwo(e);
+                }}
+              />
+            </Wrap2>
+            <Wrap2>
+              <Text> Spread Two: </Text>{" "}
+              <input
+                id="image"
+                type="file"
+                onChange={(e) => {
+                  uploadImageThree(e);
+                }}
+              />
+            </Wrap2>
+            <Wrap2>
+              <Text> Spread Three: </Text>{" "}
+              <input
+                id="image"
+                type="file"
+                onChange={(e) => {
+                  uploadImageFour(e);
+                }}
+              />
+            </Wrap2>
+            
           </InputGrid>
+          <ThumbWrap>
+              <LeftThumbWrap>
+                {coverImage ? <img src={coverImage} height="90px" /> : ""}
+                {spreadOne ? <img src={spreadOne} height="90px" /> : ""}
+              </LeftThumbWrap>
+              <RightThumbWrap>
+                {spreadTwo ? <img src={spreadTwo} height="90px" /> : ""}
+                {spreadThree ? <img src={spreadThree} height="90px" /> : ""}
+              </RightThumbWrap>
+            </ThumbWrap>
           <TextArea
             id="extraDetails"
             placeholder="Extra Details"
@@ -229,7 +247,6 @@ const Submissions = () => {
             value={addBook.extraDetails}
             onChange={(e) => handleChange(e)}
           />
-       
         </FormWrap>
         <FootWrap>
           <GuideBtn onClick={() => setIsOpen(true)}>Guidelines</GuideBtn>
@@ -259,12 +276,27 @@ const Submissions = () => {
           </Guidelines>
           {/* </ScaleOut> */}
         </GuidelineModal>
-        
       </Wrap>
     </BigWrap>
   );
 };
+const ThumbWrap = styled.div`
+width:600px;
+display:grid;
+grid-template-columns: 1fr 1fr;
+grid-gap:15px;
+margin:15px 0;`;
 
+const RightThumbWrap = styled.div`
+/* width:292.5px; */
+  display: flex;
+  justify-content: space-between;
+`;
+const LeftThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  /* width:292.5px; */
+`;
 const Text = styled.span`
   font-weight: 500;
   font-size: 18px;

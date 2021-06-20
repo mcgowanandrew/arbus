@@ -146,7 +146,7 @@ const DetailsWrap = styled.div`
   } */
 `;
 const BookCover = styled.img`
-  width: 100%;
+  width: 350px;
   height: auto;
 `;
 const CoverWrap = styled.div`
@@ -158,7 +158,7 @@ const CoverWrap = styled.div`
 const BookWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 15px auto;
   width: 700px;
 `;
 const BigWrap = styled.div`
