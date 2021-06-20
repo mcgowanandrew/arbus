@@ -6,10 +6,9 @@ import useToken from "./Hooks/useToken";
 const BookDetails = ({ book }) => {
   const { _id } = useParams();
   const [currentBook, setCurrentBook] = useState([]);
-  const [error,setError]=useState("")
-  const { token} = useToken();
+  const [error, setError] = useState("");
+  const { token } = useToken();
   const history = useHistory();
-
 
   useEffect(() => {
     fetch(`/catalogue/${_id}`)
@@ -32,10 +31,10 @@ const BookDetails = ({ book }) => {
       .catch((error) => {
         setError("error");
       });
-
     history.push("/catalogue/collection");
-    history.go(0)
+    history.go(0);
   };
+
   return (
     <BigWrap>
       <BookWrap>
@@ -44,7 +43,7 @@ const BookDetails = ({ book }) => {
           <BookCover src={cb.images} alt={cb.title} />
           <Spread>
             {cb.imageTwo ? (
-              <SpreadThumb src={cb.imageTwo} alt={cb.title}  />
+              <SpreadThumb src={cb.imageTwo} alt={cb.title} />
             ) : (
               ""
             )}
@@ -88,12 +87,14 @@ const BookDetails = ({ book }) => {
     </BigWrap>
   );
 };
+
 const Spread = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   margin-top: 15px;
 `;
+
 const SpreadThumb = styled.img`
   width: 80px;
   height: 80px;
@@ -118,51 +119,54 @@ const DelButton = styled.button`
 const ButWrap = styled.div`
   width: 100%;
   display: flex;
-  /* align-items: flex-end; */
   justify-content: flex-end;
-  /* align-content: flex-end; */
   @media (max-width: 619px) {
     width: 300px;
   }
 `;
+
 const Extra = styled.div``;
+
 const InfoDiv = styled.span`
   margin-bottom: 10px;
 `;
+
 const Photographer = styled.h2`
   margin-bottom: 10px;
 `;
+
 const Title = styled.h1`
   margin-bottom: 10px;
 `;
+
 const DetailsWrap = styled.div`
   margin-left: 15px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* flex-wrap:wrap;
- @media (max-width: 619px) {
-    width: 300px;
-  } */
 `;
 const BookCover = styled.img`
   width: 350px;
   height: auto;
 `;
+
 const CoverWrap = styled.div`
   margin-right: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
+
 const BookWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 15px auto;
   width: 700px;
 `;
+
 const BigWrap = styled.div`
   width: 100vw;
   height: 100vh;
 `;
+
 export default BookDetails;

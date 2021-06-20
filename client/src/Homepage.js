@@ -15,7 +15,7 @@ const Homepage = () => {
         setNewBooks(bookArray.reverse().slice(0, 3));
       });
   }, []);
-  // console.log("all",allBooks)
+
   return (
     <>
       <BookWrap>
@@ -26,6 +26,7 @@ const Homepage = () => {
     </>
   );
 };
+
 const BookWrap = styled.div`
   margin-top: 15px;
   display: flex;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 
 const GuidelineModal = ({ open, children }) => {
-  //   const { isOpen } = useContext(ModalContext);
   if (!open) {
     return null;
   }
@@ -13,6 +12,7 @@ const GuidelineModal = ({ open, children }) => {
     </Overlay>
   );
 };
+
 const Overlay = styled.div`
   position: fixed;
   top: 0;
@@ -22,7 +22,6 @@ const Overlay = styled.div`
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 1000;
   transition: all 1s ease-out;
-
   animation: fadein 0.5s ease-out;
   @keyframes fadein {
     0% {

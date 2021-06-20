@@ -15,10 +15,10 @@ const HomeHeader = ({ allBooks }) => {
     localStorage.clear();
     history.go(0);
   };
+  
   return (
     <HeadWrap>
       <Link to="/">Arbus</Link>
-        
         <Link to="/catalogue/collection">Collection</Link>
         {token ? (
           <Link to="/admin/all-submissions">View Submissions</Link>
@@ -31,12 +31,9 @@ const HomeHeader = ({ allBooks }) => {
         ) : (
           <StyledGoMail />
         )}
-     
-    
     </HeadWrap>
   );
 };
-
 
 const LogOut = styled.div`
   color: #000;
@@ -48,6 +45,7 @@ const LogOut = styled.div`
     cursor: pointer;
   }
 `;
+
 const Link = styled(NavLink)`
   color: #000;
   font-size: 20px;
@@ -61,6 +59,7 @@ const Link = styled(NavLink)`
     color: #c25557;
   }
 `;
+
 const StyledBiSearchAlt2 = styled(BiSearchAlt2)`
   color: #000;
   width: 25px;
@@ -72,6 +71,7 @@ const StyledBiSearchAlt2 = styled(BiSearchAlt2)`
     cursor: pointer;
   }
 `;
+
 const StyledGoMail = styled(GoMail)`
   color: #000;
   width: 25px;

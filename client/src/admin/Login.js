@@ -3,12 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-// const refreshPage =()=>{
-//   let location=useLocation()
-//   useEfffect(()=>{
-//     ga.send(["pageview",location.pathname])
-//   },[location])
-// }
+
 const Login = ({ setToken }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -31,7 +26,6 @@ const Login = ({ setToken }) => {
     });
     setToken(token);
     history.go(0);
-    // window.location.reload();
   };
   const handleChange = (e) => {
     setUsername(e.target.value);

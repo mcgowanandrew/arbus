@@ -12,6 +12,7 @@ const Book = ({ book }) => {
     e.preventDefault();
     history.push(`/catalogue/${book._id}`);
   };
+  
   const handleEditClick = (e) => {
     e.preventDefault();
     history.push(`/edit/${book._id}`);
@@ -25,7 +26,6 @@ const Book = ({ book }) => {
           <Title>{book.title}</Title>
           <Tog>{book.photographer}</Tog>
         </TitleWrap>
-
         {token ? (
           <>
             <ButWrap>
@@ -42,25 +42,27 @@ const Book = ({ book }) => {
     </BookWrap>
   );
 };
+
 const Deet = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   align-content: flex-end;
 `;
+
 const ButWrap = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-content: flex-end;
 `;
+
 const Button = styled.button`
   border: 2px solid #000;
   padding: 5px 10px;
   background-color: #000;
   color: #fff;
   font-weight: bold;
-
   &:hover {
     background-color: #fff;
     color: #000;
@@ -68,9 +70,8 @@ const Button = styled.button`
     transition: all 0.3s ease-in-out;
   }
 `;
-const TitleWrap = styled.div`
 
-`;
+const TitleWrap = styled.div``;
 
 const Hover = styled.div`
   position: absolute;
@@ -107,9 +108,11 @@ const BookWrap = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `;
+
 const BookCover = styled.img`
   width: 300px;
   height: auto;
   margin: 0 auto;
 `;
+
 export default Book;

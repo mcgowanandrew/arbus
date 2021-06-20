@@ -31,7 +31,6 @@ const SubDetails = () => {
         setCurrentSub({...json.data});
       });
   }, []);
-  console.log("data", currentSub);
   const cs = currentSub;
 
   const handleSubmit = (e) => {

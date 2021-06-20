@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
+
 const Add = () => {
-  // const [token, setToken] = useState();
-  // eslint-disable-next-line
+const history = useHistory()  // eslint-disable-next-line
   const [addError, setAddError] = useState("");
+  const [coverImage, setCoverImage] = useState();
+  const [spreadOne, setSpreadOne] = useState();
+  const [spreadTwo, setSpreadTwo] = useState();
+  const [spreadThree, setSpreadThree] = useState();
   const [addBook, setAddBook] = useState({
     title: "",
     photographer: "",
@@ -24,11 +29,13 @@ const Add = () => {
     imageThree:"",
     imageFour:"",
   });
+
   const { token, setToken } = useToken();
   
   if (!token) {
     return <Login setToken={setToken} />;
   }
+
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -50,23 +57,23 @@ const Add = () => {
         setAddError("error");
       });
     handleClear();
+    history.push("/catalogue/collection")
   };
 
   const handleClear = () => {
     document
       .querySelectorAll("input,textarea")
       .forEach((input) => (input.value = ""));
+      history.go(0);
   };
 
   const convertBase64 = (file) => {
     return new Promise((res, rej) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
-
       fileReader.onload = () => {
         res(fileReader.result);
       };
-
       fileReader.onerror = (error) => {
         rej(error);
       };
@@ -76,21 +83,28 @@ const Add = () => {
   const uploadImage = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
+    setCoverImage(base64)
     setAddBook({ ...addBook, images: base64 });
   };
+
   const uploadImageTwo = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
+    setSpreadOne(base64)
     setAddBook({ ...addBook, imageTwo: base64 });
   };
+
   const uploadImageThree = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
+    setSpreadTwo(base64)
     setAddBook({ ...addBook, imageThree: base64 });
   };
+
   const uploadImageFour = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
+    setSpreadThree(base64)
     setAddBook({ ...addBook, imageFour: base64 });
   };
 
@@ -188,7 +202,6 @@ const Add = () => {
               }}
               required/>
           </Wrap>
-
           <Wrap>
             <Text> Spread One: </Text>{" "}
             <input
@@ -220,6 +233,16 @@ const Add = () => {
             />
           </Wrap>
         </InputGrid>
+        <ThumbWrap>
+              <LeftThumbWrap>
+                {coverImage ? <img src={coverImage} height="90px" alt={addBook.title}/> : ""}
+                {spreadOne ? <img src={spreadOne} height="90px" alt={addBook.title} /> : ""}
+              </LeftThumbWrap>
+              <RightThumbWrap>
+                {spreadTwo ? <img src={spreadTwo} height="90px" alt={addBook.title}/> : ""}
+                {spreadThree ? <img src={spreadThree} height="90px" alt={addBook.title}/> : ""}
+              </RightThumbWrap>
+            </ThumbWrap>
         <TextArea
           id="extraDetails"
           placeholder="Extra Details"
@@ -237,10 +260,34 @@ const Add = () => {
     </BigWrap>
   );
 };
+
+const ThumbWrap = styled.div`
+width:600px;
+display:grid;
+grid-template-columns: 1fr 1fr;
+grid-gap:15px;
+margin-bottom: 15px;
+@media (max-width: 619px) {
+    grid-template-columns: 1fr;
+    width:300px;
+  }
+`;
+
+const RightThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const LeftThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Text = styled.span`
   font-weight: 500;
   font-size: 18px;
 `;
+
 const Wrap = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -248,12 +295,11 @@ const Wrap = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
+
 const ButWrap = styled.div`
   width: 600px;
   display: flex;
-  /* align-items: flex-end; */
   justify-content: flex-end;
-  /* align-content: flex-end; */
   @media (max-width: 619px) {
     width: 300px;
   }
@@ -268,6 +314,7 @@ const InputGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
 const TextArea = styled.textarea`
   max-width: 100%;
   min-width: 100%;
@@ -279,6 +326,7 @@ const TextArea = styled.textarea`
     outline: none;
   }
 `;
+
 const Button = styled.button`
   border: 2px solid #000;
   padding: 5px;

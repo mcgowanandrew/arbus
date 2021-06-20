@@ -53,21 +53,21 @@ const Submissions = () => {
       });
     handleClear();
   };
+
   const handleClear = () => {
     document
       .querySelectorAll("input,textarea")
       .forEach((input) => (input.value = ""));
     history.go(0);
   };
+
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
-
       fileReader.onload = () => {
         resolve(fileReader.result);
       };
-
       fileReader.onerror = (error) => {
         reject(error);
       };
@@ -80,24 +80,28 @@ const Submissions = () => {
     setCoverImage(base64);
     setAddBook({ ...addBook, images: base64 });
   };
+
   const uploadImageTwo = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setSpreadOne(base64);
     setAddBook({ ...addBook, imageTwo: base64 });
   };
+
   const uploadImageThree = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setSpreadTwo(base64);
     setAddBook({ ...addBook, imageThree: base64 });
   };
+
   const uploadImageFour = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setSpreadThree(base64);
     setAddBook({ ...addBook, imageFour: base64 });
   };
+
   return (
     <BigWrap>
       <Wrap>
@@ -226,16 +230,15 @@ const Submissions = () => {
                 }}
               />
             </Wrap2>
-            
           </InputGrid>
           <ThumbWrap>
               <LeftThumbWrap>
-                {coverImage ? <img src={coverImage} height="90px" /> : ""}
-                {spreadOne ? <img src={spreadOne} height="90px" /> : ""}
+                {coverImage ? <img src={coverImage} height="90px" alt={addBook.title}/> : ""}
+                {spreadOne ? <img src={spreadOne} height="90px" alt={addBook.title} /> : ""}
               </LeftThumbWrap>
               <RightThumbWrap>
-                {spreadTwo ? <img src={spreadTwo} height="90px" /> : ""}
-                {spreadThree ? <img src={spreadThree} height="90px" /> : ""}
+                {spreadTwo ? <img src={spreadTwo} height="90px" alt={addBook.title}/> : ""}
+                {spreadThree ? <img src={spreadThree} height="90px" alt={addBook.title}/> : ""}
               </RightThumbWrap>
             </ThumbWrap>
           <TextArea
@@ -274,33 +277,39 @@ const Submissions = () => {
               sagittis eu.
             </span>
           </Guidelines>
-          {/* </ScaleOut> */}
         </GuidelineModal>
       </Wrap>
     </BigWrap>
   );
 };
+
 const ThumbWrap = styled.div`
 width:600px;
 display:grid;
 grid-template-columns: 1fr 1fr;
 grid-gap:15px;
-margin:15px 0;`;
+margin-bottom: 15px;
+@media (max-width: 619px) {
+    grid-template-columns: 1fr;
+    width:300px;
+  }
+`;
 
 const RightThumbWrap = styled.div`
-/* width:292.5px; */
   display: flex;
   justify-content: space-between;
 `;
+
 const LeftThumbWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  /* width:292.5px; */
 `;
+
 const Text = styled.span`
   font-weight: 500;
   font-size: 18px;
 `;
+
 const Wrap2 = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -308,6 +317,7 @@ const Wrap2 = styled.div`
   justify-content: space-between;
   width: 100%;
 `;
+
 const X = styled.div`
   border: 2px solid #000;
   padding: 5px;
@@ -327,6 +337,7 @@ const X = styled.div`
     transition: all 0.3s ease-in-out;
   }
 `;
+
 const Wrap = styled.div`
   width: 600px;
   margin: 0 auto;
@@ -349,22 +360,21 @@ const Guidelines = styled.div`
     }
   }
 
-  /* display:none; */
 `;
+
 const FootWrap = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
 `;
+
 const ButWrap = styled.div`
   width: 600px;
   display: flex;
-  /* align-items: flex-end; */
   justify-content: flex-end;
   @media (max-width: 619px) {
     width: 300px;
   }
-  /* align-content: flex-end; */
 `;
 
 const InputGrid = styled.div`
@@ -376,6 +386,7 @@ const InputGrid = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
 const TextArea = styled.textarea`
   max-width: 100%;
   min-width: 100%;
@@ -387,6 +398,7 @@ const TextArea = styled.textarea`
     outline: none;
   }
 `;
+
 const Button = styled.button`
   border: 2px solid #000;
   padding: 5px 10px;
@@ -394,7 +406,6 @@ const Button = styled.button`
   color: #fff;
   margin-left: 10px;
   font-weight: bold;
-
   &:hover {
     background-color: #fff;
     color: #000;
@@ -402,14 +413,13 @@ const Button = styled.button`
     transition: all 0.3s ease-in-out;
   }
 `;
+
 const GuideBtn = styled.button`
   border: 2px solid #000;
   padding: 5px 10px;
   background-color: #000;
   color: #fff;
   font-weight: bold;
-
-  /* margin-left: 10px; */
   &:hover {
     background-color: #fff;
     color: #000;
@@ -417,6 +427,7 @@ const GuideBtn = styled.button`
     transition: all 0.3s ease-in-out;
   }
 `;
+
 const Input = styled.input`
   border: 2px solid #000;
   padding: 5px;
@@ -432,7 +443,7 @@ const FormWrap = styled.form`
   flex-direction: column;
   width: 600px;
   justify-content: center;
-  margin: 30px auto;
+  margin: 30px 0 15px auto;
   @media (max-width: 619px) {
     width: 300px;
   }
