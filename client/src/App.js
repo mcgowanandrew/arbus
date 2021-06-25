@@ -40,10 +40,10 @@ const App = () => {
       />
       <Switch>
         <Route exact path="/">
-          <Homepage allBooks={allBooks}/>
+          <Homepage allBooks={allBooks} />
         </Route>
         <Route exact path="/catalogue/collection">
-          <Collection allBooks={allBooks} setAllBooks={setAllBooks} />
+          <Collection allBooks={allBooks} />
         </Route>
         <Route exact path="/catalogue/:_id">
           <BookDetails />
@@ -67,13 +67,8 @@ const App = () => {
           <Contact />
         </Route>
         <Route exact path="/search/results">
-            <SearchResults
-              value={value}
-              SetValue={setValue}
-              searchResults={searchResults}
-              setSearchResults={setSearchResults}
-            />
-          </Route>
+          <SearchResults searchResults={searchResults} />
+        </Route>
       </Switch>
     </BrowserRouter>
   );

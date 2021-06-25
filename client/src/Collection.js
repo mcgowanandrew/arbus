@@ -4,7 +4,6 @@ import AllBooks from "./AllBooks";
 
 const Collection = ({allBooks}) => {
 
-  
   return (
     <>
       <BookWrap>

@@ -34,6 +34,7 @@ const Edit = () => {
   }, []);
 
   const cb = currentBook;
+  
   useEffect(() => {
     if (cb.title) {
       setUpdateBook({ ...cb, title: cb.title });

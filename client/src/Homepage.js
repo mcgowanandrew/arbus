@@ -7,7 +7,7 @@ const Homepage = ({allBooks}) => {
   return (
     <>
       <BookWrap>
-        {allBooks.reverse().slice(0,3).map((book) => {
+        {allBooks.slice(0,3).map((book) => {
           return <AllBooks key={book._id} book={book} />;
         })}
       </BookWrap>
@@ -20,7 +20,7 @@ const BookWrap = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  animation: fadein 1s ease-out;
+  animation: fadein .5s ease-out;
   @keyframes fadein {
     0% {
       opacity: 0;
