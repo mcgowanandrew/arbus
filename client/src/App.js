@@ -65,7 +65,8 @@ const App = () => {
         </Route>
         <Route exact path="/contact">
           <Contact />
-          <Route exact path="/search-results">
+        </Route>
+        <Route exact path="/search/results">
             <SearchResults
               value={value}
               SetValue={setValue}
@@ -73,7 +74,6 @@ const App = () => {
               setSearchResults={setSearchResults}
             />
           </Route>
-        </Route>
       </Switch>
     </BrowserRouter>
   );

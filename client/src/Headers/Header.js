@@ -33,7 +33,7 @@ const HomeHeader = ({
       return checkedBook;
     });
     setSearchResults(filteredResults);
-    history.push("/search-results");
+    history.push("/search/results");
     setIsOpen(false);
     console.log("search",searchResults)
   };
