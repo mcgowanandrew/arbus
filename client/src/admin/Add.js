@@ -56,8 +56,10 @@ const history = useHistory()  // eslint-disable-next-line
       .catch((error) => {
         setAddError("error");
       });
-    handleClear();
+    // handleClear();
     history.push("/catalogue/collection")
+    // history.go(0);
+
   };
 
   const handleClear = () => {
@@ -84,7 +86,7 @@ const history = useHistory()  // eslint-disable-next-line
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
     setCoverImage(base64)
-    setAddBook({ ...addBook, images: base64 });
+    setAddBook({ ...addBook, images: base64});
   };
 
   const uploadImageTwo = async (e) => {

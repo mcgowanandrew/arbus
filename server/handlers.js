@@ -10,8 +10,6 @@ const moment = require("moment");
 const short = require("short-uuid");
 const assert = require("assert");
 
-
-
 const addSubmission = async (req, res) => {
   const bookId = short.generate();
   const dateSubmitted = moment().format("MMM-D-YYYY-HH:mm");
@@ -51,8 +49,8 @@ const addSubmission = async (req, res) => {
       extraDetails: extraDetails,
       dateSubmitted: dateSubmitted,
       imageTwo: imageTwo,
-      imageThree:imageThree,
-      imageFour:imageFour,
+      imageThree: imageThree,
+      imageFour: imageFour,
     });
     assert.strictEqual(1, result.insertedCount);
     res.status(201).json({
@@ -60,9 +58,11 @@ const addSubmission = async (req, res) => {
       data: result,
     });
     client.close();
-    console.log("disconnected");
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).json({ status: 500, message: "Didn't work 🤬" });
+  }
 };
+
 const getAllSubmissions = async (req, res) => {
   try {
     const client = await MongoClient(MONGO_URI, options);
@@ -70,13 +70,13 @@ const getAllSubmissions = async (req, res) => {
     const db = client.db("arbus");
     const allBooks = await db.collection("submissions").find().toArray();
     assert(1, allBooks.matchedCount);
-
     res.status(200).json({ status: 200, data: allBooks });
     client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: "Didn't work 🤬" });
   }
 };
+
 const deleteSubmission = async (req, res) => {
   const _id = req.params._id;
   try {
@@ -90,6 +90,7 @@ const deleteSubmission = async (req, res) => {
     res.status(400).json({ status: 400, message: "Error" });
   }
 };
+
 const getSubById = async (req, res) => {
   let _id = req.params._id;
   try {
@@ -98,16 +99,12 @@ const getSubById = async (req, res) => {
     const db = client.db("arbus");
     const subResult = await db.collection("submissions").findOne({ _id });
     assert(1, subResult.matchedCount);
-
     res.status(201).json({ status: 201, data: subResult });
     client.close();
   } catch (err) {
     res.status(500).json({ status: 500, message: "Error" });
   }
 };
-
-
-
 
 const getAllBooks = async (req, res) => {
   try {
@@ -116,11 +113,10 @@ const getAllBooks = async (req, res) => {
     const db = client.db("arbus");
     const allBooks = await db.collection("catalogue").find().toArray();
     assert(1, allBooks.matchedCount);
-
     res.status(200).json({ status: 200, data: allBooks });
     client.close();
   } catch (err) {
-    res.status(500).json({ status: 500, message: "Didn't work 🤬" });
+    // res.status(500).json({ status: 500, message: "Didn't work 🤬" });
   }
 };
 
@@ -158,23 +154,25 @@ const getBooksByPhotographer = async (req, res) => {
     res.status(500).json({ status: 500, message: "Error" });
   }
 };
+
 const getBookByPublisher = async (req, res) => {
   let publisher = req.params.publisher;
   try {
     const client = await MongoClient(MONGO_URI, options);
     await client.connect();
     const db = client.db("arbus");
-    const result = await db.collection("catalogue").find({ publisher }).toArray();
+    const result = await db
+      .collection("catalogue")
+      .find({ publisher })
+      .toArray();
     client.close();
     res.status(200).json({ status: 200, data: result });
   } catch (err) {
     res.status(500).json({ status: 500, message: "Error" });
   }
 };
-// getBooksByPhotographer()
-// addBook();
-module.exports = {
 
+module.exports = {
   getAllBooks,
   getBookById,
   getBooksByPhotographer,
@@ -183,5 +181,4 @@ module.exports = {
   getAllSubmissions,
   deleteSubmission,
   getSubById,
-  
 };

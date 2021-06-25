@@ -71,7 +71,10 @@ const Button = styled.button`
   }
 `;
 
-const TitleWrap = styled.div``;
+const TitleWrap = styled.div`
+width:100%;
+height:auto;
+`;
 
 const Hover = styled.div`
   position: absolute;
@@ -96,6 +99,8 @@ const Tog = styled.div`
 
 const Title = styled.div`
   width: 100%;
+  font-weight: bold;
+  margin-bottom: 15px;;
 `;
 
 const BookWrap = styled.div`

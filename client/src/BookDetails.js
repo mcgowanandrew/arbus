@@ -58,7 +58,7 @@ const BookDetails = ({ book }) => {
               ""
             )}
           </Spread>
-        </CoverWrap>
+        </CoverWrap><RightWrap>
         <DetailsWrap>
           <Title>{cb.title}</Title>
           <Photographer>{cb.photographer}</Photographer>
@@ -74,6 +74,7 @@ const BookDetails = ({ book }) => {
           {cb.language ? <InfoDiv>Language: {cb.language}</InfoDiv> : ""}
           {cb.printing ? <InfoDiv>Printing: {cb.printing}</InfoDiv> : ""}
           {cb.extraDetails ? <Extra>Details: {cb.extraDetails}</Extra> : ""}
+          </DetailsWrap>
           <ButWrap>
             {" "}
             {token ? (
@@ -82,12 +83,16 @@ const BookDetails = ({ book }) => {
               ""
             )}
           </ButWrap>
-        </DetailsWrap>
+          </RightWrap>
       </BookWrap>
     </BigWrap>
   );
 };
-
+const RightWrap = styled.div`
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:space-between;`
 const Spread = styled.div`
   display: flex;
   justify-content: space-between;

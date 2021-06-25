@@ -2,19 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AllBooks from "./AllBooks";
 
-const Collection = () => {
-  const [allBooks, setAllBooks] = useState([]);
-  useEffect(() => {
-    fetch("/catalogue/all-books", { method: "GET" })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data", data);
-        const bookArray = Object.values(data)[1];
-        setAllBooks(bookArray.reverse());
-      });
-  }, []);
+const Collection = ({allBooks}) => {
+
   
   return (
     <>
