@@ -62,18 +62,18 @@ const BookDetails = ({ book }) => {
         <DetailsWrap>
           <Title>{cb.title}</Title>
           <Photographer>{cb.photographer}</Photographer>
-          {cb.size ? <InfoDiv>Size: {cb.size}</InfoDiv> : ""}
-          {cb.pages ? <InfoDiv>Pages: {cb.pages}</InfoDiv> : ""}
-          {cb.edition ? <InfoDiv>Edition: {cb.edition}</InfoDiv> : ""}
+          {cb.size ? <InfoDiv><strong>Size: </strong>{cb.size}</InfoDiv> : ""}
+          {cb.pages ? <InfoDiv><strong>Pages:</strong> {cb.pages}</InfoDiv> : ""}
+          {cb.edition ? <InfoDiv><strong>Edition:</strong> {cb.edition}</InfoDiv> : ""}
           {cb.publicationDate ? (
-            <InfoDiv>Publication Date: {cb.publicationDate}</InfoDiv>
+            <InfoDiv><strong>Publication Date:</strong> {cb.publicationDate}</InfoDiv>
           ) : (
             ""
           )}
-          {cb.publisher ? <InfoDiv>Publisher: {cb.publisher}</InfoDiv> : ""}
-          {cb.language ? <InfoDiv>Language: {cb.language}</InfoDiv> : ""}
-          {cb.printing ? <InfoDiv>Printing: {cb.printing}</InfoDiv> : ""}
-          {cb.extraDetails ? <Extra>Details: {cb.extraDetails}</Extra> : ""}
+          {cb.publisher ? <InfoDiv><strong>Publisher:</strong> {cb.publisher}</InfoDiv> : ""}
+          {cb.language ? <InfoDiv><strong>Language:</strong> {cb.language}</InfoDiv> : ""}
+          {cb.printing ? <InfoDiv><strong>Printing:</strong> {cb.printing}</InfoDiv> : ""}
+          {cb.extraDetails ? <Extra><strong>Details:</strong> {cb.extraDetails}</Extra> : ""}
           </DetailsWrap>
           <ButWrap>
             {" "}
@@ -134,14 +134,15 @@ const Extra = styled.div``;
 
 const InfoDiv = styled.span`
   margin-bottom: 10px;
+  font-size: 15px;
 `;
 
 const Photographer = styled.h2`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h1`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 const DetailsWrap = styled.div`

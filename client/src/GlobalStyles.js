@@ -88,20 +88,19 @@ a{
     color:#000;
 } */
   html, body {
-      /* max-width: 100vw;
-      font-size: 10px; */
-      /* background-color: #3F3F3F; */
+
+/* font-size: 10px;; */
 
   }
   h1{
-      /* font-weight: 500;
-      font-size: 3.0rem; */
-/*  */
+      font-weight: 500;
+      font-size: 1.4rem;
   }
   h2{
-    /* font-weight: 500;
-    font-size: 2.0rem; */
-}
+    font-weight: 500;
+    font-size: 1.1rem; 
+    font-style: italic;
+} 
 p,section{
     /* font-weight:400;
     font-size: 1.6rem; */

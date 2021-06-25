@@ -40,7 +40,7 @@ const App = () => {
       />
       <Switch>
         <Route exact path="/">
-          <Homepage />
+          <Homepage allBooks={allBooks}/>
         </Route>
         <Route exact path="/catalogue/collection">
           <Collection allBooks={allBooks} setAllBooks={setAllBooks} />

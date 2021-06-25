@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import AllBooks from "./AllBooks";
 
-const Homepage = () => {
-  const [newBooks, setNewBooks] = useState([]);
-  useEffect(() => {
-    fetch("/catalogue/all-books", { method: "GET" })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data", data);
-        const bookArray = Object.values(data)[1];
-        setNewBooks(bookArray.reverse().slice(0, 3));
-      });
-  }, []);
+const Homepage = ({allBooks}) => {
 
   return (
     <>
       <BookWrap>
-        {newBooks.map((book) => {
+        {allBooks.reverse().slice(0,3).map((book) => {
           return <AllBooks key={book._id} book={book} />;
         })}
       </BookWrap>

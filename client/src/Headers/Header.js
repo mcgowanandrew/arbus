@@ -23,20 +23,25 @@ const HomeHeader = ({
     console.log("all", allBooks);
     console.log("value", value);
     const filteredResults = allBooks.filter((book) => {
-      let checkedBook = "";
+      let checkedBookTitle = "";
+      let checkedPhotographer = ""
       let lowerCaseSearchResults = book.title.toLowerCase();
+      let lowerCasePhotographer = book.photographer.toLowerCase()
       let lowerCaseInputValue = value.toLowerCase();
-      let checkedCategory = "";
       if (lowerCaseSearchResults.includes(lowerCaseInputValue)) {
-        checkedBook = book.title;
+        checkedBookTitle = book.title;
+        return checkedBookTitle;
+
+      }else if(lowerCasePhotographer.includes(lowerCaseInputValue)){
+        checkedPhotographer = book.photographer
+        return checkedPhotographer
       }
-      return checkedBook;
     });
     setSearchResults(filteredResults);
     history.push("/search/results");
     setIsOpen(false);
-    console.log("search",searchResults)
   };
+  
 
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -70,7 +75,7 @@ const HomeHeader = ({
 
           <Input
             type="text"
-            placeholder="Search"
+            placeholder="Search: Title or Photographer"
             value={value}
             onChange={(ev) => setValue(ev.target.value)}
             onKeyDown={(ev) => {
@@ -106,7 +111,7 @@ const SearchBtn = styled.button`
 `;
 const X = styled.div`
   border: 2px solid #000;
-  padding: 5px 5px 5px 8px;
+  padding: 5px 6px 5px 8px;
   background-color: #000;
   color: #fff;
   width: 30px;
@@ -129,15 +134,16 @@ const SearchWrap = styled.div`
   padding: 15px;
   justify-content: space-between;
   border: solid 2px #000;
+  background-color: #fff;
 `;
 
 const Input = styled.input`
   border: solid 2px #000;
   margin-right: 15px;
   padding: 5px;
-  width: 200px;
-  &:focus {
-    border: none;
+  width: 100%;
+  :focus {
+    outline: none;
   }
 `;
 
@@ -161,7 +167,7 @@ const Link = styled(NavLink)`
     transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
-  &:focus {
+  :focus {
     color: #c25557;
   }
 `;
@@ -175,6 +181,8 @@ const StyledBiSearchAlt2 = styled(BiSearchAlt2)`
     color: #c25557;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
+  }  :focus {
+    color: #c25557;
   }
 `;
 
