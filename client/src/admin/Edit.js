@@ -326,7 +326,7 @@ const Edit = () => {
             {spreadTwo ? (
               <img src={spreadTwo} height="90px" alt={updateBook.title} />
             ) : cb.imageThree ? (
-              <img src={cb.imagesThree} height="90px" alt={updateBook.title} />
+              <img src={cb.imageThree} height="90px" alt={updateBook.title} />
             ) : (
               ""
             )}
