@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 // import daido from "../assests/daido.jpg";
 import { useHistory } from "react-router-dom";
-// import useToken from "../Hooks/useToken";
+import Login from "./Login";
+import useToken from "../Hooks/useToken";
 
 const SubList = ({ sub }) => {
   let history = useHistory();
@@ -22,19 +23,19 @@ const SubList = ({ sub }) => {
       });
 
     history.push("/admin/all-submissions");
+    history.go(0)
   };
 
   const handleViewClick=(e)=>{
       e.preventDefault()
       history.push(`/admin/sub/edit/${sub._id}`)
   }
-
+  const { token, setToken } = useToken();
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
   return (
-    // <Wrap>
-    //   Title: {sub.title}
-    //   <Button onClick={handleViewClick}>View</Button>
-    //   <Button type="submit" onClick={deleteSubHandler}>Reject</Button>
-    // </Wrap>
+ 
     <BookWrap key={sub._id}>
     <BookCover src={sub.images} alt={sub.title} />
     <Hover>
@@ -45,13 +46,27 @@ const SubList = ({ sub }) => {
      
           <ButWrap>
           <Button onClick={handleViewClick}>View</Button>
-      <Button type="submit" onClick={deleteSubHandler}>Reject</Button>
+      <DelButton type="submit" onClick={deleteSubHandler}>Reject</DelButton>
           </ButWrap>
    
     </Hover>
   </BookWrap>
   );
 };
+const DelButton = styled.button`
+  border: 2px solid #f00;
+  padding: 5px;
+  background-color: #f00;
+  color: #fff;
+  margin-left: 10px;
+  font-weight: bold;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+`;
 const ButWrap = styled.div`
   width: 100%;
   display: flex;

@@ -32,6 +32,8 @@ const Edit = () => {
     imageFour: "",
   });
 
+  
+
   useEffect(() => {
     fetch(`/edit/${_id}`)
       .then((rest) => rest.json())

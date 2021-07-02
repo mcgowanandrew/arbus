@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-// import { combineReducers } from "redux";
-// import daido from "../assests/daido.jpg";
+import Login from "./Login";
+import useToken from "../Hooks/useToken";
 
 const SubDetails = () => {
   let history = useHistory();
@@ -30,6 +30,8 @@ const SubDetails = () => {
     imageThree: "",
     imageFour: "",
   });
+
+
   useEffect(() => {
     fetch(`/admin/sub/edit/${_id}`)
       .then((rest) => rest.json())
@@ -187,6 +189,12 @@ const SubDetails = () => {
     setSpreadThree(base64);
     setApprove({ ...approve, imageFour: base64 });
   };
+
+  const { token, setToken } = useToken();
+  
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
   return (
     <BigWrap>
       <FormWrap autocomplete="off">

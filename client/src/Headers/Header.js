@@ -5,6 +5,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
 import useToken from "../Hooks/useToken";
 import SearchModal from "../Modals/SearchModal";
+import useViewport from "../Hooks/useViewport";
 
 const HomeHeader = ({
   allBooks,
@@ -13,10 +14,10 @@ const HomeHeader = ({
   searchResults,
   setSearchResults,
 }) => {
+  const { width } = useViewport();
+  const breakpoint = 659;
   const [isOpen, setIsOpen] = useState(false);
-
   const { token, setToken } = useToken();
-
   let history = useHistory();
 
   const handleSearch = () => {
@@ -39,7 +40,6 @@ const HomeHeader = ({
     setIsOpen(false);
   };
 
-
   const handleLogOut = (e) => {
     e.preventDefault();
     localStorage.clear();
@@ -51,8 +51,8 @@ const HomeHeader = ({
     history.push("/contact");
   };
 
-  return (
-    <HeadWrap>
+  return (<>
+ {width > breakpoint?(   <HeadWrap>
       <Link to="/">Arbus</Link>
       <Link to="/catalogue/collection">Collection</Link>
       {token ? (
@@ -90,9 +90,39 @@ const HomeHeader = ({
           </SearchBtn>
         </SearchWrap>
       </SearchModal>
-    </HeadWrap>
+    </HeadWrap>):(<HeadWrap>
+      <Link to="/">A.</Link>
+      <Link to="/catalogue/collection">Collection</Link>
+        <Link to="/submissions">Submissions</Link>
+      <StyledBiSearchAlt2 onClick={() => setIsOpen(true)} />
+        <StyledGoMail onClick={handleContactClick} />
+      <SearchModal open={isOpen}>
+        <SearchWrap>
+          <X onClick={() => setIsOpen(false)}>X</X>
+          <Input
+            type="text"
+            placeholder="Search: Title or Photographer"
+            value={value}
+            onChange={(ev) => setValue(ev.target.value)}
+            onKeyDown={(ev) => {
+              if (ev.key === "Enter") {
+                handleSearch(ev.target.value);
+              }
+            }}
+          ></Input>
+          <SearchBtn
+            onClick={(ev) => {
+              handleSearch(ev.target.value);
+            }}
+          >
+            Search
+          </SearchBtn>
+        </SearchWrap>
+      </SearchModal>
+    </HeadWrap>)}</>
   );
 };
+
 const SearchBtn = styled.button`
   border: 2px solid #000;
   padding: 5px 10px;
@@ -149,7 +179,7 @@ const LogOut = styled.div`
   font-size: 20px;
   padding: 20px;
   &:hover {
-    color: #c25557;
+    color: #828282;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
@@ -160,12 +190,12 @@ const Link = styled(NavLink)`
   font-size: 20px;
   padding: 20px;
   &:hover {
-    color: #c25557;
+    color: #828282;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
-  :focus {
-    color: #c25557;
+  &:focus {
+    border-bottom: 2px solid #000;
   }
 `;
 
@@ -175,12 +205,9 @@ const StyledBiSearchAlt2 = styled(BiSearchAlt2)`
   height: auto;
   margin: 20px;
   &:hover {
-    color: #c25557;
+    color: #828282;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-  }
-  :focus {
-    color: #c25557;
   }
 `;
 
@@ -190,7 +217,7 @@ const StyledGoMail = styled(GoMail)`
   height: auto;
   margin: 20px;
   &:hover {
-    color: #c25557;
+    color: #828282;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
@@ -199,6 +226,24 @@ const StyledGoMail = styled(GoMail)`
 const HeadWrap = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: flex-end;
+  position: relative;
+  z-index: 10;
+  width: 100vw;
+  animation: fadein 1s ease-out;
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;
+
+const HeadWrapMobile = styled.div`
+  display: flex;
+  justify-content: space-between;
   align-items: flex-end;
   position: relative;
   z-index: 10;

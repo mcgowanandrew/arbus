@@ -90,6 +90,7 @@ const Hover = styled.div`
   &:hover {
     transition: all 0.5s ease-in-out;
     opacity: 1;
+    
   }
 `;
 
@@ -100,7 +101,8 @@ const Tog = styled.div`
 const Title = styled.div`
   width: 100%;
   font-weight: bold;
-  margin-bottom: 15px;;
+  margin-bottom: 15px;
+  font-size: 20px;
 `;
 
 const BookWrap = styled.div`

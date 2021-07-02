@@ -117,6 +117,7 @@ const DelButton = styled.button`
   background-color: #f00;
   color: #fff;
   margin-left: 10px;
+  font-weight: bold;
   &:hover {
     background-color: #fff;
     color: #000;

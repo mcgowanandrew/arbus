@@ -104,7 +104,7 @@ const Submissions = () => {
   return (
     <BigWrap>
       <Wrap>
-        <FormWrap autocomplete="off">
+        <FormWrap autocomplete="off" >
           <InputGrid>
             <Input
               id="title"
