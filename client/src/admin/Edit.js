@@ -32,8 +32,6 @@ const Edit = () => {
     imageFour: "",
   });
 
-  
-
   useEffect(() => {
     fetch(`/edit/${_id}`)
       .then((rest) => rest.json())
@@ -110,6 +108,23 @@ const Edit = () => {
         setError("error");
       });
     history.push(`/catalogue/${_id}`);
+    history.go(0);
+  };
+
+  const deleteBookHandler = (e) => {
+    e.preventDefault();
+    fetch(`/admin/catalogue/${_id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .catch((error) => {
+        setError("error");
+      });
+    history.push("/catalogue/collection");
     history.go(0);
   };
 
@@ -337,7 +352,7 @@ const Edit = () => {
           <Button onClick={(e) => handleSubmit(e)}>Update</Button>
           <Button onClick={(e) => handleCancel(e)}>Cancel</Button>
 
-          <DelButton>Delete</DelButton>
+          <DelButton onClick={(e) => deleteBookHandler(e)}>Delete</DelButton>
         </ButWrap>
       </FormWrap>
     </BigWrap>

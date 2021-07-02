@@ -20,6 +20,11 @@ const BookDetails = ({ book }) => {
   //   fetchData();
   // },[currentBook])
   const cb = currentBook;
+  
+  const handleEditClick = (e) => {
+    e.preventDefault();
+    history.push(`/edit/${_id}`);
+  };
 
   const deleteBookHandler = (e) => {
     e.preventDefault();
@@ -61,42 +66,88 @@ const BookDetails = ({ book }) => {
               ""
             )}
           </Spread>
-        </CoverWrap><RightWrap>
-        <DetailsWrap>
-          <Title>{cb.title}</Title>
-          <Photographer>{cb.photographer}</Photographer>
-          {cb.size ? <InfoDiv><strong>Size: </strong>{cb.size}</InfoDiv> : ""}
-          {cb.pages ? <InfoDiv><strong>Pages:</strong> {cb.pages}</InfoDiv> : ""}
-          {cb.edition ? <InfoDiv><strong>Edition:</strong> {cb.edition}</InfoDiv> : ""}
-          {cb.publicationDate ? (
-            <InfoDiv><strong>Publication Date:</strong> {cb.publicationDate}</InfoDiv>
-          ) : (
-            ""
-          )}
-          {cb.publisher ? <InfoDiv><strong>Publisher:</strong> {cb.publisher}</InfoDiv> : ""}
-          {cb.language ? <InfoDiv><strong>Language:</strong> {cb.language}</InfoDiv> : ""}
-          {cb.printing ? <InfoDiv><strong>Printing:</strong> {cb.printing}</InfoDiv> : ""}
-          {cb.extraDetails ? <Extra><strong>Details:</strong> {cb.extraDetails}</Extra> : ""}
-          </DetailsWrap>
-          <ButWrap>
-            {" "}
-            {token ? (
-              
-              <DelButton onClick={deleteBookHandler}>Delete</DelButton>
+        </CoverWrap>
+        <RightWrap>
+          <DetailsWrap>
+            <Title>{cb.title}</Title>
+            <Photographer>{cb.photographer}</Photographer>
+            {cb.size ? (
+              <InfoDiv>
+                <strong>Size: </strong>
+                {cb.size}
+              </InfoDiv>
             ) : (
               ""
             )}
+            {cb.pages ? (
+              <InfoDiv>
+                <strong>Pages:</strong> {cb.pages}
+              </InfoDiv>
+            ) : (
+              ""
+            )}
+            {cb.edition ? (
+              <InfoDiv>
+                <strong>Edition:</strong> {cb.edition}
+              </InfoDiv>
+            ) : (
+              ""
+            )}
+            {cb.publicationDate ? (
+              <InfoDiv>
+                <strong>Publication Date:</strong> {cb.publicationDate}
+              </InfoDiv>
+            ) : (
+              ""
+            )}
+            {cb.publisher ? (
+              <InfoDiv>
+                <strong>Publisher:</strong> {cb.publisher}
+              </InfoDiv>
+            ) : (
+              ""
+            )}
+            {cb.language ? (
+              <InfoDiv>
+                <strong>Language:</strong> {cb.language}
+              </InfoDiv>
+            ) : (
+              ""
+            )}
+            {cb.printing ? (
+              <InfoDiv>
+                <strong>Printing:</strong> {cb.printing}
+              </InfoDiv>
+            ) : (
+              ""
+            )}
+            {cb.extraDetails ? (
+              <Extra>
+                <strong>Details:</strong> {cb.extraDetails}
+              </Extra>
+            ) : (
+              ""
+            )}
+          </DetailsWrap>
+          <ButWrap>
+            {" "}
+            {token
+              ? (<><Button onClick={handleEditClick}>Edit</Button>
+                  <DelButton onClick={deleteBookHandler}>Delete</DelButton></>
+                )
+              : ""}
           </ButWrap>
-          </RightWrap>
+        </RightWrap>
       </BookWrap>
     </BigWrap>
   );
 };
 const RightWrap = styled.div`
-width:100%;
-display:flex;
-flex-direction:column;
-justify-content:space-between;`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 const Spread = styled.div`
   display: flex;
   justify-content: space-between;
@@ -127,11 +178,24 @@ const DelButton = styled.button`
 `;
 
 const ButWrap = styled.div`
+  margin-left: 15px;
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  @media (max-width: 619px) {
-    width: 300px;
+  justify-content: space-between;
+  align-content: flex-end;
+`;
+
+const Button = styled.button`
+  border: 2px solid #000;
+  padding: 5px 10px;
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
   }
 `;
 

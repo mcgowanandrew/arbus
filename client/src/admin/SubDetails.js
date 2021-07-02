@@ -56,6 +56,7 @@ const SubDetails = () => {
         setError("error");
       });
     history.push("/catalogue/collection");
+    history.go(0)
   };
 
   const deleteSubHandler = (e) => {

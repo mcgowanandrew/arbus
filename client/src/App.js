@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(()=>{
     fetchBookData()
-  },[])
+  })
   const fetchBookData = async () => {
     try {
       const res = await fetch("/catalogue/all-books");

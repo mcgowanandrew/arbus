@@ -57,8 +57,7 @@ const history = useHistory()  // eslint-disable-next-line
         setAddError("error");
       });
     // handleClear();
-    history.push("/")
-    history.go(0);
+    history.push("/catalogue/collection")
 
   };
 
