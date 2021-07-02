@@ -79,6 +79,9 @@ const updateBook = async (req, res) => {
     printing,
     extraDetails,
     images,
+    imageTwo,
+    imageThree,
+    imageFour,
   } = req.body;
   const updatedBook = {
     $set: {
@@ -94,6 +97,9 @@ const updateBook = async (req, res) => {
       printing: printing,
       extraDetails: extraDetails,
       images: images,
+      imageTwo: imageTwo,
+      imageThree: imageThree,
+      imageFour: imageFour,
     },
   };
   try {

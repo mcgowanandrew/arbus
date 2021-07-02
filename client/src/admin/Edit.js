@@ -9,6 +9,10 @@ const Edit = () => {
   const { _id } = useParams();
   const [error, setError] = useState();
   const [currentBook, setCurrentBook] = useState([]);
+  const [coverImage, setCoverImage] = useState();
+  const [spreadOne, setSpreadOne] = useState();
+  const [spreadTwo, setSpreadTwo] = useState();
+  const [spreadThree, setSpreadThree] = useState();
   const [updateBook, setUpdateBook] = useState({
     title: "",
     photographer: "",
@@ -23,6 +27,9 @@ const Edit = () => {
     printing: "",
     extraDetails: "",
     bookCover: "",
+    imageTwo: "",
+    imageThree: "",
+    imageFour: "",
   });
 
   useEffect(() => {
@@ -34,7 +41,7 @@ const Edit = () => {
   }, []);
 
   const cb = currentBook;
-  
+
   useEffect(() => {
     if (cb.title) {
       setUpdateBook({ ...cb, title: cb.title });
@@ -68,6 +75,15 @@ const Edit = () => {
     }
     if (cb.images) {
       setUpdateBook({ ...cb, images: cb.images });
+    }
+    if (cb.imageTwo) {
+      setUpdateBook({ ...cb, imageTwo: cb.imageTwo });
+    }
+    if (cb.imageThree) {
+      setUpdateBook({ ...cb, imageThree: cb.imageThree });
+    }
+    if (cb.imageFour) {
+      setUpdateBook({ ...cb, imageFour: cb.imageFour });
     }
   }, [cb]);
 
@@ -116,7 +132,30 @@ const Edit = () => {
   const uploadImage = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertBase64(file);
+    setCoverImage(base64);
+
     setUpdateBook({ ...updateBook, images: base64 });
+  };
+
+  const uploadImageTwo = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setSpreadOne(base64);
+    setUpdateBook({ ...updateBook, imageTwo: base64 });
+  };
+
+  const uploadImageThree = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setSpreadTwo(base64);
+    setUpdateBook({ ...updateBook, imageThree: base64 });
+  };
+
+  const uploadImageFour = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setSpreadThree(base64);
+    setUpdateBook({ ...updateBook, imageFour: base64 });
   };
 
   const { token, setToken } = useToken();
@@ -207,14 +246,82 @@ const Edit = () => {
             defaultValue={cb.printing}
             onChange={(e) => handleChange(e)}
           />
-          <Input
-            id="image"
-            type="file"
-            onChange={(e) => {
-              uploadImage(e);
-            }}
-          />
+          <Wrap>
+            <Text> Cover: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImage(e);
+              }}
+              required
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread One: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageTwo(e);
+              }}
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread Two: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageThree(e);
+              }}
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread Three: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageFour(e);
+              }}
+            />
+          </Wrap>
         </InputGrid>
+        <ThumbWrap>
+          <LeftThumbWrap>
+            {coverImage ? (
+              <img src={coverImage} height="90px" alt={updateBook.title} />
+            ) : cb.images ? (
+              <img src={cb.images} height="90px" alt={updateBook.title} />
+            ) : (
+              ""
+            )}
+            {spreadOne ? (
+              <img src={spreadOne} height="90px" alt={updateBook.title} />
+            ) : cb.imageTwo ? (
+              <img src={cb.imageTwo} height="90px" alt={updateBook.title} />
+            ) : (
+              ""
+            )}
+          </LeftThumbWrap>
+          <RightThumbWrap>
+            {spreadTwo ? (
+              <img src={spreadTwo} height="90px" alt={updateBook.title} />
+            ) : cb.imageThree ? (
+              <img src={cb.imagesThree} height="90px" alt={updateBook.title} />
+            ) : (
+              ""
+            )}
+            {spreadThree ? (
+              <img src={spreadThree} height="90px" alt={updateBook.title} />
+            ) : cb.imageFour ? (
+              <img src={cb.imageFour} height="90px" alt={updateBook.title} />
+            ) : (
+              ""
+            )}
+          </RightThumbWrap>
+        </ThumbWrap>
         <TextArea
           id="extraDetails"
           placeholder="Extra Details"
@@ -234,6 +341,39 @@ const Edit = () => {
     </BigWrap>
   );
 };
+const ThumbWrap = styled.div`
+  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  margin-bottom: 15px;
+  @media (max-width: 619px) {
+    grid-template-columns: 1fr;
+    width: 300px;
+  }
+`;
+
+const RightThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const LeftThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const Text = styled.span`
+  font-weight: 500;
+  font-size: 18px;
+`;
+
+const Wrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
 const DelButton = styled.button`
   border: 2px solid #f00;
   padding: 5px;

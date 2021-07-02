@@ -14,14 +14,10 @@ const SearchResults = ({ searchResults}) => {
   )}
 
 const BookWrap = styled.div`
-  width: 300px;
-  height: auto;
-  margin: 15px;
-  position: relative;
-  z-index: 1;
+  margin-top: 15px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  justify-content: center;
 `;
 
 

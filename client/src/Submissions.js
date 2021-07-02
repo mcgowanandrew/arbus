@@ -232,15 +232,31 @@ const Submissions = () => {
             </Wrap2>
           </InputGrid>
           <ThumbWrap>
-              <LeftThumbWrap>
-                {coverImage ? <img src={coverImage} height="90px" alt={addBook.title}/> : ""}
-                {spreadOne ? <img src={spreadOne} height="90px" alt={addBook.title} /> : ""}
-              </LeftThumbWrap>
-              <RightThumbWrap>
-                {spreadTwo ? <img src={spreadTwo} height="90px" alt={addBook.title}/> : ""}
-                {spreadThree ? <img src={spreadThree} height="90px" alt={addBook.title}/> : ""}
-              </RightThumbWrap>
-            </ThumbWrap>
+            <LeftThumbWrap>
+              {coverImage ? (
+                <img src={coverImage} height="90px" alt={addBook.title} />
+              ) : (
+                ""
+              )}
+              {spreadOne ? (
+                <img src={spreadOne} height="90px" alt={addBook.title} />
+              ) : (
+                ""
+              )}
+            </LeftThumbWrap>
+            <RightThumbWrap>
+              {spreadTwo ? (
+                <img src={spreadTwo} height="90px" alt={addBook.title} />
+              ) : (
+                ""
+              )}
+              {spreadThree ? (
+                <img src={spreadThree} height="90px" alt={addBook.title} />
+              ) : (
+                ""
+              )}
+            </RightThumbWrap>
+          </ThumbWrap>
           <TextArea
             id="extraDetails"
             placeholder="Extra Details"
@@ -284,14 +300,14 @@ const Submissions = () => {
 };
 
 const ThumbWrap = styled.div`
-width:600px;
-display:grid;
-grid-template-columns: 1fr 1fr;
-grid-gap:15px;
-margin-bottom: 15px;
-@media (max-width: 619px) {
+  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  margin-bottom: 15px;
+  @media (max-width: 619px) {
     grid-template-columns: 1fr;
-    width:300px;
+    width: 300px;
   }
 `;
 
@@ -358,7 +374,6 @@ const Guidelines = styled.div`
       opacity: 1;
     }
   }
-
 `;
 
 const FootWrap = styled.div`

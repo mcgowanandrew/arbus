@@ -20,28 +20,25 @@ const HomeHeader = ({
   let history = useHistory();
 
   const handleSearch = () => {
-    console.log("all", allBooks);
-    console.log("value", value);
     const filteredResults = allBooks.filter((book) => {
       let checkedBookTitle = "";
-      let checkedPhotographer = ""
+      let checkedPhotographer = "";
       let lowerCaseSearchResults = book.title.toLowerCase();
-      let lowerCasePhotographer = book.photographer.toLowerCase()
+      let lowerCasePhotographer = book.photographer.toLowerCase();
       let lowerCaseInputValue = value.toLowerCase();
       if (lowerCaseSearchResults.includes(lowerCaseInputValue)) {
         checkedBookTitle = book.title;
         return checkedBookTitle;
-
-      }else if(lowerCasePhotographer.includes(lowerCaseInputValue)){
-        checkedPhotographer = book.photographer
-        return checkedPhotographer
+      } else if (lowerCasePhotographer.includes(lowerCaseInputValue)) {
+        checkedPhotographer = book.photographer;
+        return checkedPhotographer;
       }
     });
     setSearchResults(filteredResults);
     history.push("/search/results");
     setIsOpen(false);
   };
-  
+
 
   const handleLogOut = (e) => {
     e.preventDefault();
@@ -181,7 +178,8 @@ const StyledBiSearchAlt2 = styled(BiSearchAlt2)`
     color: #c25557;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
-  }  :focus {
+  }
+  :focus {
     color: #c25557;
   }
 `;
