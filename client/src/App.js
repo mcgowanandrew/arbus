@@ -17,17 +17,20 @@ const App = () => {
   const [value, setValue] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [allBooks, setAllBooks] = useState([]);
-  useEffect(() => {
-    fetch("/catalogue/all-books", { method: "GET" })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log("data", data);
-        const bookArray = Object.values(data)[1];
-        setAllBooks(bookArray.reverse());
-      });
-  }, []);
+
+  useEffect(()=>{
+    fetchBookData()
+  },[])
+  const fetchBookData = async () => {
+    try {
+      const res = await fetch("/catalogue/all-books");
+      const data = await res.json();
+      const bookArray = Object.values(data)[1]
+      setAllBooks(bookArray.reverse());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <BrowserRouter>
       <GlobalStyles />

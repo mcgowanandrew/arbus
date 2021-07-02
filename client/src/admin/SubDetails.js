@@ -9,12 +9,15 @@ const SubDetails = () => {
   const { _id } = useParams();
   const [error, setError] = useState();
   const [currentSub, setCurrentSub] = useState([]);
+  const [coverImage, setCoverImage] = useState();
+  const [spreadOne, setSpreadOne] = useState();
+  const [spreadTwo, setSpreadTwo] = useState();
+  const [spreadThree, setSpreadThree] = useState();
   const [approve, setApprove] = useState({
     title: "",
     photographer: "",
     size: "",
     pages: "",
-    images: "",
     edition: "",
     editionSize: "",
     publicationDate: "",
@@ -22,19 +25,22 @@ const SubDetails = () => {
     language: "",
     printing: "",
     extraDetails: "",
-    bookCover: "",
+    images: "",
+    imageTwo: "",
+    imageThree: "",
+    imageFour: "",
   });
   useEffect(() => {
     fetch(`/admin/sub/edit/${_id}`)
       .then((rest) => rest.json())
       .then((json) => {
-        setCurrentSub({...json.data});
+        setCurrentSub({ ...json.data });
       });
   }, []);
   const cs = currentSub;
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     fetch("/admin/add", {
       method: "POST",
       body: JSON.stringify({ ...approve }),
@@ -47,8 +53,8 @@ const SubDetails = () => {
       .catch((error) => {
         setError("error");
       });
-      history.push("/catalogue/collection");
-      };
+    history.push("/catalogue/collection");
+  };
 
   const deleteSubHandler = (e) => {
     e.preventDefault();
@@ -67,7 +73,28 @@ const SubDetails = () => {
     history.push("/admin/all-submissions");
   };
 
-  const handleChange = (e, type) => {
+  const submitDelete = (e) => {
+    // e.preventDefault();
+    fetch(`/admin/sub/${_id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .catch((error) => {
+        setError("error");
+      });
+
+
+  };
+  const handleApprove = (e) => {
+    e.preventDefault()
+    handleSubmit();
+    submitDelete();
+  };
+  const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
@@ -104,10 +131,62 @@ const SubDetails = () => {
     }
     if (cs.extraDetails) {
       setApprove({ ...cs, extraDetails: cs.extraDetails });
-    } if (cs.images) {
-        setApprove({ ...cs, images: cs.images });
-      }
+    }
+    if (cs.images) {
+      setApprove({ ...cs, images: cs.images });
+    }
+    if (cs.imageTwo) {
+      setApprove({ ...cs, imageTwo: cs.imageTwo });
+    }
+    if (cs.imageThree) {
+      setApprove({ ...cs, imageThree: cs.imageThree });
+    }
+    if (cs.imageFour) {
+      setApprove({ ...cs, imageFour: cs.imageFour });
+    }
   }, [cs]);
+
+  const convertBase64 = (file) => {
+    return new Promise((res, rej) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+      fileReader.onload = () => {
+        res(fileReader.result);
+      };
+      fileReader.onerror = (error) => {
+        rej(error);
+      };
+    });
+  };
+
+  const uploadImage = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setCoverImage(base64);
+
+    setApprove({ ...approve, images: base64 });
+  };
+
+  const uploadImageTwo = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setSpreadOne(base64);
+    setApprove({ ...approve, imageTwo: base64 });
+  };
+
+  const uploadImageThree = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setSpreadTwo(base64);
+    setApprove({ ...approve, imageThree: base64 });
+  };
+
+  const uploadImageFour = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertBase64(file);
+    setSpreadThree(base64);
+    setApprove({ ...approve, imageFour: base64 });
+  };
   return (
     <BigWrap>
       <FormWrap autocomplete="off">
@@ -192,7 +271,82 @@ const SubDetails = () => {
             defaultValue={cs.printing}
             onChange={(e) => handleChange(e)}
           />
+          <Wrap>
+            <Text> Cover: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImage(e);
+              }}
+              required
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread One: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageTwo(e);
+              }}
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread Two: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageThree(e);
+              }}
+            />
+          </Wrap>
+          <Wrap>
+            <Text> Spread Three: </Text>{" "}
+            <input
+              id="image"
+              type="file"
+              onChange={(e) => {
+                uploadImageFour(e);
+              }}
+            />
+          </Wrap>
         </InputGrid>
+        <ThumbWrap>
+          <LeftThumbWrap>
+            {coverImage ? (
+              <img src={coverImage} height="90px" alt={approve.title} />
+            ) : cs.images ? (
+              <img src={cs.images} height="90px" alt={approve.title} />
+            ) : (
+              ""
+            )}
+            {spreadOne ? (
+              <img src={spreadOne} height="90px" alt={approve.title} />
+            ) : cs.imageTwo ? (
+              <img src={cs.imageTwo} height="90px" alt={approve.title} />
+            ) : (
+              ""
+            )}
+          </LeftThumbWrap>
+          <RightThumbWrap>
+            {spreadTwo ? (
+              <img src={spreadTwo} height="90px" alt={approve.title} />
+            ) : cs.imageThree ? (
+              <img src={cs.imageThree} height="90px" alt={approve.title} />
+            ) : (
+              ""
+            )}
+            {spreadThree ? (
+              <img src={spreadThree} height="90px" alt={approve.title} />
+            ) : cs.imageFour ? (
+              <img src={cs.imageFour} height="90px" alt={approve.title} />
+            ) : (
+              ""
+            )}
+          </RightThumbWrap>
+        </ThumbWrap>
         <TextArea
           id="extraDetails"
           placeholder="Extra Details"
@@ -203,13 +357,48 @@ const SubDetails = () => {
           onChange={(e) => handleChange(e)}
         />
         <ButWrap>
-          <Button onClick={(e) => handleSubmit(e)}>Add Book</Button>
+          <Button onClick={(e) => handleApprove(e)}>Add Book</Button>
           <DelButton onClick={deleteSubHandler}>Delete</DelButton>
         </ButWrap>
       </FormWrap>
     </BigWrap>
   );
 };
+
+const ThumbWrap = styled.div`
+  width: 600px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+  margin-bottom: 15px;
+  @media (max-width: 619px) {
+    grid-template-columns: 1fr;
+    width: 300px;
+  }
+`;
+
+const RightThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const LeftThumbWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+const Text = styled.span`
+  font-weight: 500;
+  font-size: 18px;
+`;
+
+const Wrap = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
 const ButWrap = styled.div`
   width: 600px;
   display: flex;

@@ -1,16 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import AllBooks from "./AllBooks";
+import useViewport from "./Hooks/useViewport";
 
-const Homepage = ({allBooks}) => {
+const Homepage = ({ allBooks }) => {
+  const { width } = useViewport();
+  const breakpoint = 659;
 
   return (
     <>
-      <BookWrap>
-        {allBooks.slice(0,3).map((book) => {
-          return <AllBooks key={book._id} book={book} />;
-        })}
-      </BookWrap>
+      {width > breakpoint ? (
+        <BookWrap>
+          {allBooks.slice(0, 3).map((book) => {
+            return <AllBooks key={book._id} book={book} />;
+          })}
+        </BookWrap>
+      ) : (
+        <BookWrap>
+          {allBooks.slice(0, 1).map((book) => {
+            return <AllBooks key={book._id} book={book} />;
+          })}
+        </BookWrap>
+      )}
     </>
   );
 };
@@ -20,7 +31,7 @@ const BookWrap = styled.div`
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
-  animation: fadein .5s ease-out;
+  animation: fadein 0.5s ease-out;
   @keyframes fadein {
     0% {
       opacity: 0;

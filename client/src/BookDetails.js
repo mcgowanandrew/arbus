@@ -16,6 +16,9 @@ const BookDetails = ({ book }) => {
       .then((json) => setCurrentBook(json.data));
   }, []);
 
+  // useEffect(()=>{
+  //   fetchData();
+  // },[currentBook])
   const cb = currentBook;
 
   const deleteBookHandler = (e) => {
@@ -78,6 +81,7 @@ const BookDetails = ({ book }) => {
           <ButWrap>
             {" "}
             {token ? (
+              
               <DelButton onClick={deleteBookHandler}>Delete</DelButton>
             ) : (
               ""
@@ -168,6 +172,10 @@ const BookWrap = styled.div`
   justify-content: space-between;
   margin: 15px auto;
   width: 700px;
+  @media (max-width: 619px) {
+    flex-direction: column;
+    width: 300px;
+  }
 `;
 
 const BigWrap = styled.div`

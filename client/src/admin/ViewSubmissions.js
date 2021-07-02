@@ -18,7 +18,7 @@ const ViewSubmissions = () => {
         const bookArray = Object.values(data)[1];
         setAllSubs(bookArray);
       });
-  });
+  },[]);
   if (!token) {
     return <Login setToken={setToken} />;
   }

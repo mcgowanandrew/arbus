@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import useToken from "./Hooks/useToken";
 
 const Book = ({ book }) => {
-  const { token, setToken } = useToken();
+  const { token} = useToken();
 
   let history = useHistory();
 
