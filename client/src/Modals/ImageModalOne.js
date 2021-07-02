@@ -21,7 +21,7 @@ const Overlay = styled.div`
   left: 0;
   background-color: rgba(255, 255, 255, 0.9);
   z-index: 1000;
-  transition: all 1s ease-out;
+  transition: all 0.5s ease-out;
   animation: fadein 0.5s ease-out;
   @keyframes fadein {
     0% {
@@ -40,8 +40,8 @@ const ModalDiv = styled.div`
   transform: translate(-50%, -50%);
   z-index: 1000;
   width: 600px;
-  transition: all 1s ease-out;
-  animation: fadein 1s ease-out;
+  transition: all 0.5s ease-out;
+  animation: fadein 0.5s ease-out;
   @keyframes fadein {
     0% {
       opacity: 0;
