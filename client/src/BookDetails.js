@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import useToken from "./Hooks/useToken";
+import ImageModalOne from "./Modals/ImageModalOne"
+import ImageModalTwo from "./Modals/ImageModalTwo"
+import ImageModalThree from "./Modals/ImageModalThree"
+
+
 
 const BookDetails = ({ book }) => {
   const { _id } = useParams();
@@ -9,6 +14,11 @@ const BookDetails = ({ book }) => {
   const [error, setError] = useState("");
   const { token } = useToken();
   const history = useHistory();
+  const [modalOneIsOpen,setModalOneIsOpen]=useState(false)
+  const [modalTwoIsOpen,setModalTwoIsOpen]=useState(false)
+  const [modalThreeIsOpen,setModalThreeIsOpen]=useState(false)
+
+
 
   useEffect(() => {
     fetch(`/catalogue/${_id}`)
@@ -49,19 +59,27 @@ const BookDetails = ({ book }) => {
         <CoverWrap>
           {" "}
           <BookCover src={cb.images} alt={cb.title} />
+         
           <Spread>
-            {cb.imageTwo ? (
-              <SpreadThumb src={cb.imageTwo} alt={cb.title} />
+            {cb.imageTwo ? (<>
+              <SpreadThumb onClick={() => setModalOneIsOpen(true)} src={cb.imageTwo} alt={cb.title} />
+              <ImageModalOne open={modalOneIsOpen}><ModalWrap ><X onClick={() => setModalOneIsOpen(false)}>X</X>
+              <Popup><FullImage src={cb.imageTwo} alt={cb.title}/></Popup></ModalWrap>
+            </ImageModalOne></>
             ) : (
               ""
             )}
-            {cb.imageThree ? (
-              <SpreadThumb src={cb.imageThree} alt={cb.title} />
+            {cb.imageThree ? (<>
+              <SpreadThumb onClick={()=> setModalTwoIsOpen(true)} src={cb.imageThree} alt={cb.title} />
+              <ImageModalTwo open={modalTwoIsOpen}><ModalWrap><X onClick={() => setModalTwoIsOpen(false)}>X</X>
+              <Popup><FullImage src={cb.imageThree} alt={cb.title}/></Popup></ModalWrap></ImageModalTwo></>
             ) : (
               ""
             )}
-            {cb.imageFour ? (
-              <SpreadThumb src={cb.imageFour} alt={cb.title} />
+            {cb.imageFour ? (<>
+              <SpreadThumb onClick={()=> setModalThreeIsOpen(true)} src={cb.imageFour} alt={cb.title} />
+              <ImageModalThree open={modalThreeIsOpen}><ModalWrap><X onClick={() => setModalThreeIsOpen(false)}>X</X>
+              <Popup><FullImage src={cb.imageFour} alt={cb.title}/></Popup></ModalWrap></ImageModalThree></>
             ) : (
               ""
             )}
@@ -142,6 +160,38 @@ const BookDetails = ({ book }) => {
     </BigWrap>
   );
 };
+const X = styled.div`
+  border: 2px solid #000;
+  padding: 5px;
+  background-color: #000;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  line-height: 6px;
+  font-size: 10px;
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+`;
+
+const ModalWrap = styled.div`
+transition:0.3s ease`
+const Popup=styled.div`
+padding:15px;
+border: 2px solid #000;
+background: #fff;
+`
+const FullImage = styled.img`
+max-width:100%;
+height:auto;
+`
 const RightWrap = styled.div`
   width: 100%;
   display: flex;
@@ -160,6 +210,9 @@ const SpreadThumb = styled.img`
   height: 80px;
   overflow: hidden;
   border: none;
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const DelButton = styled.button`
