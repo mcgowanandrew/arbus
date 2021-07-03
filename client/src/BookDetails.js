@@ -8,13 +8,14 @@ import ImageModalThree from "./Modals/ImageModalThree";
 
 const BookDetails = ({ book }) => {
   const { _id } = useParams();
+  const { token } = useToken();
   const [currentBook, setCurrentBook] = useState([]);
   const [error, setError] = useState("");
-  const { token } = useToken();
-  const history = useHistory();
   const [modalOneIsOpen, setModalOneIsOpen] = useState(false);
   const [modalTwoIsOpen, setModalTwoIsOpen] = useState(false);
   const [modalThreeIsOpen, setModalThreeIsOpen] = useState(false);
+  const history = useHistory();
+
 
   useEffect(() => {
     fetch(`/catalogue/${_id}`)

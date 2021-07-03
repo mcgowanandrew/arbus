@@ -4,15 +4,18 @@ import styled from "styled-components";
 
 const Contact = () => {
   const history = useHistory();
+
   const handleClear = () => {
     document
       .querySelectorAll("input,textarea")
       .forEach((input) => (input.value = ""));
     history.go(0);
   };
-  const handleSumbit = (ev) => {
+
+  const handleSumbit = (e) => {
     
   };
+
   return (
     <Wrapper>
       <Wrap>

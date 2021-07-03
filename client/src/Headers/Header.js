@@ -74,16 +74,16 @@ const HomeHeader = ({
             type="text"
             placeholder="Search: Title or Photographer"
             value={value}
-            onChange={(ev) => setValue(ev.target.value)}
-            onKeyDown={(ev) => {
-              if (ev.key === "Enter") {
+            onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
                 handleSearch(ev.target.value);
               }
             }}
           ></Input>
           <SearchBtn
-            onClick={(ev) => {
-              handleSearch(ev.target.value);
+            onClick={(e) => {
+              handleSearch(e.target.value);
             }}
           >
             Search
@@ -103,16 +103,16 @@ const HomeHeader = ({
             type="text"
             placeholder="Search: Title or Photographer"
             value={value}
-            onChange={(ev) => setValue(ev.target.value)}
+            onChange={(e) => setValue(e.target.value)}
             onKeyDown={(ev) => {
-              if (ev.key === "Enter") {
-                handleSearch(ev.target.value);
+              if (e.key === "Enter") {
+                handleSearch(e.target.value);
               }
             }}
           ></Input>
           <SearchBtn
-            onClick={(ev) => {
-              handleSearch(ev.target.value);
+            onClick={(e) => {
+              handleSearch(e.target.value);
             }}
           >
             Search

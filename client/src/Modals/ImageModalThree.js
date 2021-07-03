@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 
-const GuidelineModal = ({ open, children }) => {
+const ImageModalThree = ({ open, children }) => {
   if (!open) {
     return null;
   }
@@ -55,4 +55,4 @@ const ModalDiv = styled.div`
   }
 `;
 
-export default GuidelineModal;
+export default ImageModalThree;
