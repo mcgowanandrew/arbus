@@ -21,6 +21,7 @@ const App = () => {
   useEffect(()=>{
     fetchBookData()
   })
+
   const fetchBookData = async () => {
     try {
       const res = await fetch("/catalogue/all-books");
@@ -28,7 +29,7 @@ const App = () => {
       const bookArray = Object.values(data)[1]
       setAllBooks(bookArray.reverse());
     } catch (error) {
-      console.log(error);
+      throw "error"
     }
   };
   return (

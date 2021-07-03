@@ -77,7 +77,7 @@ const HomeHeader = ({
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
-                handleSearch(ev.target.value);
+                handleSearch(e.target.value);
               }
             }}
           ></Input>
@@ -104,7 +104,7 @@ const HomeHeader = ({
             placeholder="Search: Title or Photographer"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            onKeyDown={(ev) => {
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 handleSearch(e.target.value);
               }

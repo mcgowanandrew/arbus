@@ -94,6 +94,9 @@ const InputGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 15px;
   margin-bottom: 15px;
+  @media (max-width: 619px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BigWrap = styled.div``;
