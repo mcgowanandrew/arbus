@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 
 const GuidelineModal = ({ open, children }) => {
+  
   if (!open) {
     return null;
   }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 
 const ImageModalOne = ({ open, children }) => {
+    
   if (!open) {
     return null;
   }

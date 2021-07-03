@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 
 const SearchModal = ({ open, children }) => {
+  
   if (!open) {
     return null;
   }
