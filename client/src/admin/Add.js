@@ -58,7 +58,7 @@ const history = useHistory()  // eslint-disable-next-line
       .catch((error) => {
         setAddError("error");
       });
-    handleClear();
+    // handleClear();
     setSuccessIsOpen(true)
 
   };
@@ -116,6 +116,12 @@ const history = useHistory()  // eslint-disable-next-line
     setSpreadThree(base64)
     setAddBook({ ...addBook, imageFour: base64 });
   };
+
+  const xHandler=()=>{
+    setSuccessIsOpen(false)
+    handleClear()
+  
+  }
 
   return (
     <BigWrap>
@@ -268,7 +274,7 @@ const history = useHistory()  // eslint-disable-next-line
       </FormWrap>
       <SuccessModal open={sucessIsOpen}>
         <Success>
-          <X onClick={()=> setSuccessIsOpen(false)}>X</X>
+          <X onClick={xHandler}>X</X>
           <Message>Book has been added to the collection</Message><Button onClick={viewCollection}>View Collection</Button>
         </Success>
       </SuccessModal>

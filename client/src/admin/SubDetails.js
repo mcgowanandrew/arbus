@@ -74,6 +74,7 @@ const SubDetails = () => {
       });
 
     history.push("/admin/all-submissions");
+    history.go(0)
   };
 
   const submitDelete = (e) => {
