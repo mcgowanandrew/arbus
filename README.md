@@ -1,5 +1,2 @@
-# arbus
-Final project for Concordia Bootcamp
-
-
-work in progress, don't judge me, Love you!
+# Arbus
+<img src="./client/public/images/arbus.png" style="width: 100%;" />
