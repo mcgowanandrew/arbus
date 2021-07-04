@@ -12,6 +12,7 @@ import SubDetails from "./admin/SubDetails";
 import Edit from "./admin/Edit";
 import Contact from "./Contact";
 import SearchResults from "./SearchResults";
+import Footer from "./Footer"
 
 const App = () => {
   const [value, setValue] = useState("");
@@ -74,6 +75,7 @@ const App = () => {
           <SearchResults searchResults={searchResults} />
         </Route>
       </Switch>
+      <Footer/>
     </BrowserRouter>
   );
 };

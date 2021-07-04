@@ -333,7 +333,7 @@ const BookWrap = styled.div`
 
 const BigWrap = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 84vh;
 `;
 
 export default BookDetails;

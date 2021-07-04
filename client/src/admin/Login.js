@@ -99,7 +99,9 @@ const InputGrid = styled.div`
   }
 `;
 
-const BigWrap = styled.div``;
+const BigWrap = styled.div`
+width:100vw;
+height:80vh;`;
 
 const FormWrap = styled.form`
   flex-wrap: wrap;

@@ -12,17 +12,27 @@ const Contact = () => {
     history.go(0);
   };
 
-  const handleSumbit = (e) => {
-    
-  };
+  const handleSumbit = (e) => {};
 
   return (
     <Wrapper>
       <Wrap>
         <FormWrap>
           <InputGrid>
-            <Input id="Name" placeholder="Name" type="text" name="Name" required="true"/>
-            <Input id="email" placeholder="Email" type="text" name="email" required="true"/>
+            <Input
+              id="Name"
+              placeholder="Name"
+              type="text"
+              name="Name"
+              required="true"
+            />
+            <Input
+              id="email"
+              placeholder="Email"
+              type="text"
+              name="email"
+              required="true"
+            />
           </InputGrid>
           <TextArea
             id="message"
@@ -34,11 +44,15 @@ const Contact = () => {
           />
         </FormWrap>
         <ButWrap>
-          <Button   onClick={(ev) => {
+          <Button
+            onClick={(ev) => {
               handleSumbit(ev);
             }}
             type="submit"
-            value="Submit">Submit</Button>
+            value="Submit"
+          >
+            Submit
+          </Button>
           <Button onClick={handleClear}>Reset</Button>
         </ButWrap>
       </Wrap>
@@ -75,7 +89,10 @@ const Input = styled.input`
   }
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 82vh;
+`;
 const Wrap = styled.div`
   width: 600px;
   margin: 0 auto;

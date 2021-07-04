@@ -23,15 +23,19 @@ const ViewSubmissions = () => {
     return <Login setToken={setToken} />;
   }
   return (
-    <>
+    <><BigWrap>
       <BookWrap>
         {allSubs.map((sub) => {
           return <SubList key={sub._id} sub={sub} />;
         })}
       </BookWrap>
+      </BigWrap>
     </>
   );
 };
+const BigWrap=styled.div`
+width:100vw;
+height:84vh;`
 const BookWrap = styled.div`
   margin-top: 15px;
   display: flex;

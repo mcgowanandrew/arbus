@@ -8,7 +8,7 @@ const Homepage = ({ allBooks }) => {
   const breakpoint = 659;
 
   return (
-    <>
+    <><BigWrap>
       {width > breakpoint ? (
         <BookWrap>
           {allBooks.slice(0, 3).map((book) => {
@@ -21,12 +21,16 @@ const Homepage = ({ allBooks }) => {
             return <AllBooks key={book._id} book={book} />;
           })}
         </BookWrap>
-      )}
+      )}</BigWrap>
     </>
+    
   );
 };
-
+const BigWrap = styled.div`
+width:100vw;
+height:84vh;`
 const BookWrap = styled.div`
+
   margin-top: 15px;
   display: flex;
   flex-flow: row wrap;
