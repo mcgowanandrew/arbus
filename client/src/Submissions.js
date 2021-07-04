@@ -52,8 +52,8 @@ const Submissions = () => {
       .catch((error) => {
         setAddError("error");
       });
-    handleClear();
-    setSuccessModalIsOpen(true)
+      setSuccessModalIsOpen(true)
+    // handleClear();
   };
 
   const handleClear = () => {
@@ -103,7 +103,16 @@ const Submissions = () => {
     setSpreadThree(base64);
     setAddBook({ ...addBook, imageFour: base64 });
   };
+const xHandler=()=>{
+  setSuccessModalIsOpen(false)
+  handleClear()
 
+}
+const viewCollection=()=>{
+  history.push("/catalogue/collection")
+  window.scrollTo(0, 0)
+
+}
   return (
     <BigWrap>
       <Wrap>
@@ -278,7 +287,7 @@ const Submissions = () => {
         </FootWrap>
         <GuidelineModal open={isOpen}>
           <Guidelines>
-            <X onClick={() => setIsOpen(false)}>X</X>
+            <X onClick={()=> setIsOpen(false)}>X</X>
             <span>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Elit
@@ -298,8 +307,8 @@ const Submissions = () => {
         </GuidelineModal>
         <SuccessModal open={successModalIsOpen}>
           <Success>
-          <X onClick={() => setSuccessModalIsOpen(false)}>X</X>
-<Message>Thank you for your submission!</Message>
+          <X onClick={xHandler}>X</X>
+<Message>Thank you for your submission!</Message><Button onClick={viewCollection}>View Collection</Button>
           </Success>
         </SuccessModal>
       </Wrap>
@@ -308,11 +317,14 @@ const Submissions = () => {
 };
 const Message = styled.div`
 margin-left:15px;`
+
 const Success = styled.div`
   border: 2px solid #000;
   background-color: #fff;
-  display: inline-flex;
-  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
   line-height: 1.6;
   animation: fadein 2s ease-out;
   @keyframes fadein {
