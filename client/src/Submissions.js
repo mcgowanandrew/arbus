@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import GuidelineModal from "./Modals/GuidelineModal";
+import SuccessModal from "./Modals/SuccessModal"
 
 const Submissions = () => {
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
+  const [successModalIsOpen, setSuccessModalIsOpen]=useState(false)
   const [addError, setAddError] = useState("");
   const [coverImage, setCoverImage] = useState();
   const [spreadOne, setSpreadOne] = useState();
@@ -51,6 +53,7 @@ const Submissions = () => {
         setAddError("error");
       });
     handleClear();
+    setSuccessModalIsOpen(true)
   };
 
   const handleClear = () => {
@@ -293,11 +296,34 @@ const Submissions = () => {
             </span>
           </Guidelines>
         </GuidelineModal>
+        <SuccessModal open={successModalIsOpen}>
+          <Success>
+          <X onClick={() => setSuccessModalIsOpen(false)}>X</X>
+<Message>Thank you for your submission!</Message>
+          </Success>
+        </SuccessModal>
       </Wrap>
     </BigWrap>
   );
 };
-
+const Message = styled.div`
+margin-left:15px;`
+const Success = styled.div`
+  border: 2px solid #000;
+  background-color: #fff;
+  display: inline-flex;
+  padding: 15px;
+  line-height: 1.6;
+  animation: fadein 2s ease-out;
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
 const ThumbWrap = styled.div`
   width: 600px;
   display: grid;

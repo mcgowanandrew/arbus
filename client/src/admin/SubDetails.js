@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
-
+import SuccessModal from "../Modals/SuccessModal"
 const SubDetails = () => {
   let history = useHistory();
   const { _id } = useParams();
+  const [sucessIsOpen, setSuccessIsOpen]=useState(false)
   const [error, setError] = useState();
   const [currentSub, setCurrentSub] = useState([]);
   const [coverImage, setCoverImage] = useState();
@@ -55,8 +56,7 @@ const SubDetails = () => {
       .catch((error) => {
         setError("error");
       });
-    history.push("/catalogue/collection");
-    history.go(0)
+   setSuccessIsOpen(true)
   };
 
   const deleteSubHandler = (e) => {
@@ -104,6 +104,11 @@ const SubDetails = () => {
     setApprove({ ...approve, [name]: value });
   };
 
+  const viewCollection=()=>{
+    history.push("/catalogue/collection")
+    history.go(0)
+
+  }
   useEffect(() => {
     if (cs.title) {
       setApprove({ ...cs, title: cs.title });
@@ -370,10 +375,56 @@ const SubDetails = () => {
           <DelButton onClick={deleteSubHandler}>Delete</DelButton>
         </ButWrap>
       </FormWrap>
+      <SuccessModal open={sucessIsOpen}>
+        <Success>
+          <X onClick={()=> setSuccessIsOpen(false)}>X</X>
+          <Message>Submission has been added to the collection</Message><Button onClick={viewCollection}>View Collection</Button>
+        </Success>
+      </SuccessModal>
     </BigWrap>
   );
 };
+const X = styled.div`
+  border: 2px solid #000;
+  padding: 10px 8px;
+  background-color: #000;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  line-height: 6px;
+  font-size: 15px;
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: bold;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+`;
 
+const Message = styled.div`
+margin-left:15px;`
+
+const Success = styled.div`
+  border: 2px solid #000;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  line-height: 1.6;
+  animation: fadein 2s ease-out;
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
 const ThumbWrap = styled.div`
   width: 600px;
   display: grid;
@@ -444,6 +495,7 @@ const DelButton = styled.button`
   background-color: #f00;
   color: #fff;
   margin-left: 10px;
+  font-weight: bold;
   &:hover {
     background-color: #fff;
     color: #000;
@@ -457,6 +509,7 @@ const Button = styled.button`
   background-color: #000;
   color: #fff;
   margin-left: 10px;
+  font-weight: bold;
   &:hover {
     background-color: #fff;
     color: #000;

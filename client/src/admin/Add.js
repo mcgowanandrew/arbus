@@ -3,10 +3,12 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
+import SuccessModal from "../Modals/SuccessModal"
 
 const Add = () => {
 const history = useHistory()  // eslint-disable-next-line
   const [addError, setAddError] = useState("");
+  const [sucessIsOpen, setSuccessIsOpen]=useState(false)
   const [coverImage, setCoverImage] = useState();
   const [spreadOne, setSpreadOne] = useState();
   const [spreadTwo, setSpreadTwo] = useState();
@@ -56,8 +58,8 @@ const history = useHistory()  // eslint-disable-next-line
       .catch((error) => {
         setAddError("error");
       });
-    // handleClear();
-    history.push("/catalogue/collection")
+    handleClear();
+    setSuccessIsOpen(true)
 
   };
 
@@ -67,6 +69,11 @@ const history = useHistory()  // eslint-disable-next-line
       .forEach((input) => (input.value = ""));
       history.go(0);
   };
+
+  const viewCollection=()=>{
+    history.push("/catalogue/collection")
+
+  }
 
   const convertBase64 = (file) => {
     return new Promise((res, rej) => {
@@ -258,10 +265,56 @@ const history = useHistory()  // eslint-disable-next-line
           <Button onClick={handleClear}>Reset</Button>
         </ButWrap>
       </FormWrap>
+      <SuccessModal open={sucessIsOpen}>
+        <Success>
+          <X onClick={()=> setSuccessIsOpen(false)}>X</X>
+          <Message>Book has been added to the collection</Message><Button onClick={viewCollection}>View Collection</Button>
+        </Success>
+      </SuccessModal>
     </BigWrap>
   );
 };
+const X = styled.div`
+  border: 2px solid #000;
+  padding: 10px 8px;
+  background-color: #000;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  line-height: 6px;
+  font-size: 15px;
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: bold;
+  &:hover {
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+`;
 
+const Message = styled.div`
+margin-left:15px;`
+
+const Success = styled.div`
+  border: 2px solid #000;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  line-height: 1.6;
+  animation: fadein 2s ease-out;
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
 const ThumbWrap = styled.div`
 width:600px;
 display:grid;
@@ -334,6 +387,7 @@ const Button = styled.button`
   background-color: #000;
   color: #fff;
   margin-left: 10px;
+  font-weight: bold;
   &:hover {
     background-color: #fff;
     color: #000;
