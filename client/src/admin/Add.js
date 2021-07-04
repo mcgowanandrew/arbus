@@ -72,6 +72,7 @@ const history = useHistory()  // eslint-disable-next-line
 
   const viewCollection=()=>{
     history.push("/catalogue/collection")
+    window.scrollTo(0, 0)
 
   }
 

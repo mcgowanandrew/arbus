@@ -106,7 +106,7 @@ const SubDetails = () => {
 
   const viewCollection=()=>{
     history.push("/catalogue/collection")
-    history.go(0)
+    window.scrollTo(0, 0)
 
   }
   useEffect(() => {

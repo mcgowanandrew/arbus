@@ -135,7 +135,7 @@ const Edit = () => {
   };
   const viewBook=()=>{
     history.push(`/catalogue/${_id}`);
-    history.go(0);
+    window.scrollTo(0, 0)
 
   }
 
@@ -364,7 +364,7 @@ const Edit = () => {
       <SuccessModal open={sucessIsOpen}>
         <Success>
           <X onClick={()=> setSuccessIsOpen(false)}>X</X>
-          <Message>Book has been updated</Message><Button onClick={viewBook}>View Collection</Button>
+          <Message>Book has been updated</Message><Button onClick={viewBook}>View Book</Button>
         </Success>
       </SuccessModal>
     </BigWrap>
