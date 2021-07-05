@@ -68,10 +68,10 @@ Admin can edit or remove any book in the collection after it was been submitted.
 <br/>
 
 ### Mobile responsive:
-<img src="./client/public/images/mobile1.png" style="width: 75%;" />
-<img src="./client/public/images/mobile2.png" style="width: 75%;" />
-<img src="./client/public/images/mobile3.png" style="width: 75%;" />
-<img src="./client/public/images/mobile4.png" style="width: 75%;" />
+<img src="./client/public/images/mobile1.png" style="width: 50%;" />
+<img src="./client/public/images/mobile2.png" style="width: 50%;" />
+<img src="./client/public/images/mobile3.png" style="width: 50%;" />
+<img src="./client/public/images/mobile4.png" style="width: 50%;" />
 
 ## Frontend dependencies:
 <img src="./client/public/images/frontenddep.png" style="width: 50%;" />
