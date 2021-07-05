@@ -7,6 +7,8 @@
 Arbus is an App for Photobook Collectors. It's a user submitted resource where anyone can access detailed information on Photobooks.\
 This project was completed as final project for Concordia's Web Development Bootcamp.\
 I built this project using React,Node.js,Express and Styled-Components.
+
+View a demonstration here: https://www.youtube.com/watch?v=HQO0AGLM_bk
 <br/>
 <br/>
 
