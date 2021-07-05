@@ -69,7 +69,6 @@ const HomeHeader = ({
       <Modal open={isOpen}>
         <SearchWrap>
           <X onClick={() => setIsOpen(false)}>X</X>
-
           <Input
             type="text"
             placeholder="Search: Title or Photographer"
@@ -96,7 +95,7 @@ const HomeHeader = ({
         <Link to="/submissions">Submissions</Link>
       <StyledBiSearchAlt2 onClick={() => setIsOpen(true)} />
         <StyledGoMail onClick={handleContactClick} />
-      <SearchModal open={isOpen}>
+      <Modal open={isOpen}>
         <SearchWrap>
           <X onClick={() => setIsOpen(false)}>X</X>
           <Input
@@ -118,7 +117,7 @@ const HomeHeader = ({
             Search
           </SearchBtn>
         </SearchWrap>
-      </SearchModal>
+      </Modal>
     </HeadWrap>)}</>
   );
 };

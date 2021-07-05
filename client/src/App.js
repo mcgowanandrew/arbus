@@ -32,6 +32,7 @@ const App = () => {
       throw "error";
     }
   };
+  
   return (
     <BrowserRouter>
       <GlobalStyles />

@@ -7,6 +7,7 @@ const ImageModalOne = ({ open, children }) => {
   if (!open) {
     return null;
   }
+  
   return (
     <Overlay>
       <ModalDiv>{children}</ModalDiv>
