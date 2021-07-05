@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import styled from "styled-components";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
-import SuccessModal from "../Modals/SuccessModal"
+import Modal from "../Modals/Modal"
 
 const Add = () => {
 const history = useHistory()  // eslint-disable-next-line
@@ -272,12 +272,12 @@ const history = useHistory()  // eslint-disable-next-line
           <Button onClick={handleClear}>Reset</Button>
         </ButWrap>
       </FormWrap>
-      <SuccessModal open={sucessIsOpen}>
+      <Modal open={sucessIsOpen}>
         <Success>
           <X onClick={xHandler}>X</X>
           <Message>Book has been added to the collection</Message><Button onClick={viewCollection}>View Collection</Button>
         </Success>
-      </SuccessModal>
+      </Modal>
     </BigWrap>
   );
 };

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
-import useToken from "./Hooks/useToken";
-import ImageModalOne from "./Modals/ImageModalOne";
-import ImageModalTwo from "./Modals/ImageModalTwo";
-import ImageModalThree from "./Modals/ImageModalThree";
+import useToken from "../Hooks/useToken";
+import Modal from "../Modals/Modal"
 
 const BookDetails = ({ book }) => {
   const { _id } = useParams();
@@ -62,14 +60,14 @@ const BookDetails = ({ book }) => {
                   src={cb.imageTwo}
                   alt={cb.title}
                 />
-                <ImageModalOne open={modalOneIsOpen}>
+                <Modal open={modalOneIsOpen}>
                   <ModalWrap>
                     <X onClick={() => setModalOneIsOpen(false)}>X</X>
                     <Popup>
                       <FullImage src={cb.imageTwo} alt={cb.title} />
                     </Popup>
                   </ModalWrap>
-                </ImageModalOne>
+                </Modal>
               </>
             ) : (
               ""
@@ -81,14 +79,14 @@ const BookDetails = ({ book }) => {
                   src={cb.imageThree}
                   alt={cb.title}
                 />
-                <ImageModalTwo open={modalTwoIsOpen}>
+                <Modal open={modalTwoIsOpen}>
                   <ModalWrap>
                     <X onClick={() => setModalTwoIsOpen(false)}>X</X>
                     <Popup>
                       <FullImage src={cb.imageThree} alt={cb.title} />
                     </Popup>
                   </ModalWrap>
-                </ImageModalTwo>
+                </Modal>
               </>
             ) : (
               ""
@@ -100,14 +98,14 @@ const BookDetails = ({ book }) => {
                   src={cb.imageFour}
                   alt={cb.title}
                 />
-                <ImageModalThree open={modalThreeIsOpen}>
+                <Modal open={modalThreeIsOpen}>
                   <ModalWrap>
                     <X onClick={() => setModalThreeIsOpen(false)}>X</X>
                     <Popup>
                       <FullImage src={cb.imageFour} alt={cb.title} />
                     </Popup>
                   </ModalWrap>
-                </ImageModalThree>
+                </Modal>
               </>
             ) : (
               ""

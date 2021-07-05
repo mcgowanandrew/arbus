@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AllBooks from "./AllBooks";
-import useViewport from "./Hooks/useViewport";
+import useViewport from "../Hooks/useViewport";
 
 const Homepage = ({ allBooks }) => {
   const { width } = useViewport();

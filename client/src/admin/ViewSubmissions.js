@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
-import SubList from "../admin/SubList";
+import SubList from "./SubList";
 
 const ViewSubmissions = () => {
   const { token, setToken } = useToken();

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
-import SuccessModal from "../Modals/SuccessModal"
+import Modal from "../Modals/Modal"
 const SubDetails = () => {
   let history = useHistory();
   const { _id } = useParams();
@@ -376,12 +376,12 @@ const SubDetails = () => {
           <DelButton onClick={deleteSubHandler}>Delete</DelButton>
         </ButWrap>
       </FormWrap>
-      <SuccessModal open={sucessIsOpen}>
+      <Modal open={sucessIsOpen}>
         <Success>
           <X onClick={()=> setSuccessIsOpen(false)}>X</X>
           <Message>Submission has been added to the collection</Message><Button onClick={viewCollection}>View Collection</Button>
         </Success>
-      </SuccessModal>
+      </Modal>
     </BigWrap>
   );
 };

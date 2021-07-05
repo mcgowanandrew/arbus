@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import useToken from "./Hooks/useToken";
+import useToken from "../Hooks/useToken";
 
 const Book = ({ book }) => {
 

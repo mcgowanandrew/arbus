@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
 import useToken from "../Hooks/useToken";
-import SearchModal from "../Modals/SearchModal";
+import Modal from "../Modals/Modal";
 import useViewport from "../Hooks/useViewport";
 
 const HomeHeader = ({
@@ -66,7 +66,7 @@ const HomeHeader = ({
       ) : (
         <StyledGoMail onClick={handleContactClick} />
       )}
-      <SearchModal open={isOpen}>
+      <Modal open={isOpen}>
         <SearchWrap>
           <X onClick={() => setIsOpen(false)}>X</X>
 
@@ -89,7 +89,7 @@ const HomeHeader = ({
             Search
           </SearchBtn>
         </SearchWrap>
-      </SearchModal>
+      </Modal>
     </HeadWrap>):(<HeadWrap>
       <Link to="/">A.</Link>
       <Link to="/catalogue/collection">Collection</Link>

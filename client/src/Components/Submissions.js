@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import GuidelineModal from "./Modals/GuidelineModal";
-import SuccessModal from "./Modals/SuccessModal"
+import Modal from "../Modals/Modal"
 
 const Submissions = () => {
   const history = useHistory();
@@ -285,7 +284,7 @@ const viewCollection=()=>{
             <Button onClick={handleClear}>Reset</Button>
           </ButWrap>
         </FootWrap>
-        <GuidelineModal open={isOpen}>
+        <Modal open={isOpen}>
           <Guidelines>
             <X onClick={()=> setIsOpen(false)}>X</X>
             <span>
@@ -304,13 +303,13 @@ const viewCollection=()=>{
               sagittis eu.
             </span>
           </Guidelines>
-        </GuidelineModal>
-        <SuccessModal open={successModalIsOpen}>
+        </Modal>
+        <Modal open={successModalIsOpen}>
           <Success>
           <X onClick={xHandler}>X</X>
 <Message>Thank you for your submission!</Message><Button onClick={viewCollection}>View Collection</Button>
           </Success>
-        </SuccessModal>
+        </Modal>
       </Wrap>
     </BigWrap>
   );

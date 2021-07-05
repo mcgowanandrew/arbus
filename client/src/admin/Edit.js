@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
-import SuccessModal from "../Modals/SuccessModal"
+import Modal from "../Modals/Modal"
 
 const Edit = () => {
   let history = useHistory();
@@ -361,12 +361,12 @@ const Edit = () => {
           <DelButton onClick={(e) => deleteBookHandler(e)}>Delete</DelButton>
         </ButWrap>
       </FormWrap>
-      <SuccessModal open={sucessIsOpen}>
+      <Modal open={sucessIsOpen}>
         <Success>
           <X onClick={()=> setSuccessIsOpen(false)}>X</X>
           <Message>Book has been updated</Message><Button onClick={viewBook}>View Book</Button>
         </Success>
-      </SuccessModal>
+      </Modal>
     </BigWrap>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-// import daido from "../assests/daido.jpg";
 import { useHistory } from "react-router-dom";
 import Login from "./Login";
 import useToken from "../Hooks/useToken";
