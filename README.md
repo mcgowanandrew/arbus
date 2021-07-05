@@ -41,3 +41,42 @@ View a demonstration here: https://www.youtube.com/watch?v=HQO0AGLM_bk
 <img src="./client/public/images/submit.png" style="width: 100%;" />
 <br/>
 <br/>
+
+## Admin features:
+### View all submissions:
+<img src="./client/public/images/viewsubs.png" style="width: 100%;" />
+From the view all submissions page the Admin can choose to reject or view the submission details.
+<br/>
+<br/>
+
+### View submission details:
+<img src="./client/public/images/editsub.png" style="width: 100%;" />
+Approve, edit or reject submission.
+<br/>
+<br/>
+
+### Edit all books in the collection:
+<img src="./client/public/images/adminview.png" style="width: 100%;" />
+<img src="./client/public/images/adminedit.png" style="width: 100%;" />
+Admin can edit or remove any book in the collection after it was been submitted.
+<br/>
+<br/>
+
+### Add books to collection:
+<img src="./client/public/images/adminadd.png" style="width: 100%;" />
+<br/>
+<br/>
+
+### Mobile responsive:
+<img src="./client/public/images/mobile1.png" style="width: 100%;" />
+<img src="./client/public/images/mobile2.png" style="width: 100%;" />
+<img src="./client/public/images/mobile3.png" style="width: 100%;" />
+<img src="./client/public/images/mobile4.png" style="width: 100%;" />
+
+
+
+
+
+
+
+
