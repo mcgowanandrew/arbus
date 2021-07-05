@@ -73,6 +73,16 @@ Admin can edit or remove any book in the collection after it was been submitted.
 <img src="./client/public/images/mobile3.png" style="width: 100%;" />
 <img src="./client/public/images/mobile4.png" style="width: 100%;" />
 
+## Frontend dependencies:
+<img src="./client/public/images/frontenddep.png" style="width: 50%;" />
+<br/>
+<br/>
+
+## Backend dependencies:
+<img src="./client/public/images/backenddep.png" style="width: 50%;" />
+
+
+
 
 
 
