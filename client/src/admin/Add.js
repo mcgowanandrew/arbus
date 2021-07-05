@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
 import Login from "./Login";
-import useToken from "../Hooks/useToken";
+import { useToken } from "../Hooks";
 import Modal from "../Modals/Modal"
 
 const Add = () => {

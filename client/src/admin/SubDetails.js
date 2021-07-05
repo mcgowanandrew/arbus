@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import Login from "./Login";
-import useToken from "../Hooks/useToken";
+import { useToken } from "../Hooks";
 import Modal from "../Modals/Modal"
 const SubDetails = () => {
   let history = useHistory();

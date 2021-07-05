@@ -3,9 +3,9 @@ import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { GoMail } from "react-icons/go";
-import useToken from "../Hooks/useToken";
+import { useViewport,useToken } from "../Hooks";
 import Modal from "../Modals/Modal";
-import useViewport from "../Hooks/useViewport";
+
 
 const HomeHeader = ({
   allBooks,

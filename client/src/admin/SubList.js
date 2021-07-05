@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Login from "./Login";
-import useToken from "../Hooks/useToken";
+import { useToken } from "../Hooks";
 
 const SubList = ({ sub }) => {
   let history = useHistory();

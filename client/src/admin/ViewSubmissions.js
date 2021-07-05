@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Login from "./Login";
-import useToken from "../Hooks/useToken";
+import { useToken } from "../Hooks";
 import SubList from "./SubList";
 
 const ViewSubmissions = () => {
