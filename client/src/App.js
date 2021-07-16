@@ -7,7 +7,6 @@ import {
   BookDetails,
   Collection,
   Contact,
-  Footer,
   Homepage,
   SearchResults,
   Submissions,
@@ -75,7 +74,6 @@ const App = () => {
           <SearchResults searchResults={searchResults} />
         </Route>
       </Switch>
-      <Footer />
     </BrowserRouter>
   );
 };

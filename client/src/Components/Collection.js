@@ -7,7 +7,7 @@ const Collection = ({allBooks}) => {
   return (
     <>
       <BookWrap>
-        {allBooks.reverse().map((book) => {
+        {allBooks.map((book) => {
           return <AllBooks key={book._id} book={book} />;
         })}
       </BookWrap>
