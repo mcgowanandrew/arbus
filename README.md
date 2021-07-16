@@ -58,6 +58,7 @@ Approve, edit or reject submission.
 <br/>
 
 ### Edit all books in the collection:
+## To access the admin proceed to localhost:3000/admin/add , any username and password will work for demo purposes
 <img src="./client/public/images/adminview.png" style="width: 100%;" />
 <img src="./client/public/images/adminedit.png" style="width: 100%;" />
 Admin can edit or remove any book in the collection after it was been submitted.
