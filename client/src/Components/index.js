@@ -1,7 +1,6 @@
 export {default as BookDetails} from "./BookDetails"
 export {default as Collection} from "./Collection"
 export {default as Contact} from "./Contact"
-export {default as Footer} from "./Footer"
 export {default as Homepage} from "./Homepage"
 export {default as SearchResults} from "./SearchResults"
 export {default as Submissions} from "./Submissions"

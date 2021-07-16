@@ -25,6 +25,8 @@ View a demonstration here: https://www.youtube.com/watch?v=HQO0AGLM_bk
 <br/>
 <br/>
 
+## * Note images are slow to load due to being on MongoDB's shared tier, with an upgrade to Dedicated performance increases
+
 ## User Features:
 ### Individual Book details page with pop up images:
 <img src="./client/public/images/details01.png" style="width: 100%;" />
