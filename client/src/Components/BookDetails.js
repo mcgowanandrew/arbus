@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams, useHistory } from "react-router-dom";
 import { useToken } from "../Hooks";
-import Modal from "../Modals/Modal"
+import Modal from "../Modals/Modal";
 
 const BookDetails = ({ book }) => {
   const { _id } = useParams();
@@ -14,13 +14,11 @@ const BookDetails = ({ book }) => {
   const [modalThreeIsOpen, setModalThreeIsOpen] = useState(false);
   const history = useHistory();
 
-
   useEffect(() => {
     fetch(`/catalogue/${_id}`)
       .then((rest) => rest.json())
       .then((json) => setCurrentBook(json.data));
   }, []);
-
 
   const cb = currentBook;
 
@@ -53,7 +51,7 @@ const BookDetails = ({ book }) => {
           {" "}
           <BookCover src={cb.images} alt={cb.title} />
           <Spread>
-            {cb.imageTwo ? (
+            {cb.imageTwo && (
               <>
                 <SpreadThumb
                   onClick={() => setModalOneIsOpen(true)}
@@ -69,10 +67,8 @@ const BookDetails = ({ book }) => {
                   </ModalWrap>
                 </Modal>
               </>
-            ) : (
-              ""
             )}
-            {cb.imageThree ? (
+            {cb.imageThree && (
               <>
                 <SpreadThumb
                   onClick={() => setModalTwoIsOpen(true)}
@@ -88,10 +84,8 @@ const BookDetails = ({ book }) => {
                   </ModalWrap>
                 </Modal>
               </>
-            ) : (
-              ""
             )}
-            {cb.imageFour ? (
+            {cb.imageFour && (
               <>
                 <SpreadThumb
                   onClick={() => setModalThreeIsOpen(true)}
@@ -107,82 +101,62 @@ const BookDetails = ({ book }) => {
                   </ModalWrap>
                 </Modal>
               </>
-            ) : (
-              ""
-            )}
+            ) }
           </Spread>
         </CoverWrap>
         <RightWrap>
           <DetailsWrap>
             <Title>{cb.title}</Title>
             <Photographer>{cb.photographer}</Photographer>
-            {cb.size ? (
+            {cb.size && (
               <InfoDiv>
                 <strong>Size: </strong>
                 {cb.size}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.pages ? (
+            {cb.pages && (
               <InfoDiv>
                 <strong>Pages:</strong> {cb.pages}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.edition ? (
+            {cb.edition && (
               <InfoDiv>
                 <strong>Edition:</strong> {cb.edition}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.publicationDate ? (
+            {cb.publicationDate && (
               <InfoDiv>
                 <strong>Publication Date:</strong> {cb.publicationDate}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.publisher ? (
+            {cb.publisher && (
               <InfoDiv>
                 <strong>Publisher:</strong> {cb.publisher}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.language ? (
+            {cb.language && (
               <InfoDiv>
                 <strong>Language:</strong> {cb.language}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.printing ? (
+            {cb.printing && (
               <InfoDiv>
                 <strong>Printing:</strong> {cb.printing}
               </InfoDiv>
-            ) : (
-              ""
             )}
-            {cb.extraDetails ? (
+            {cb.extraDetails && (
               <Extra>
                 <strong>Details:</strong> {cb.extraDetails}
               </Extra>
-            ) : (
-              ""
             )}
           </DetailsWrap>
           <ButWrap>
             {" "}
-            {token ? (
+            {token &&(
               <>
                 <Button onClick={handleEditClick}>Edit</Button>
                 <DelButton onClick={deleteBookHandler}>Delete</DelButton>
               </>
-            ) : (
-              ""
             )}
           </ButWrap>
         </RightWrap>
@@ -239,6 +213,7 @@ const SpreadThumb = styled.img`
   height: 80px;
   overflow: hidden;
   border: none;
+  object-fit: cover;
   &:hover {
     cursor: pointer;
   }
@@ -282,7 +257,8 @@ const Button = styled.button`
 `;
 
 const Extra = styled.div`
-line-height: 20px;`;
+  line-height: 20px;
+`;
 
 const InfoDiv = styled.span`
   margin-bottom: 10px;
