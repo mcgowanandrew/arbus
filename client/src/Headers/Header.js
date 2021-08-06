@@ -194,7 +194,7 @@ const Link = styled(NavLink)`
     cursor: pointer;
   }
   &:focus {
-    border-bottom: 2px solid #000;
+    color: #828282;
   }
 `;
 
