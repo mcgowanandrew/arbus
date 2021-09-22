@@ -118,7 +118,7 @@ const getAllBooks = async (req, res) => {
     res.status(200).json({ status: 200, data: allBooks });
     client.close();
   } catch (err) {
-    // res.status(500).json({ status: 500, message: "Didn't work 🤬" });
+    res.status(500).json({ status: 500, message: "Didn't work 🤬" });
   }
 };
 
@@ -138,7 +138,6 @@ const getBookById = async (req, res) => {
 
 const getBooksByPhotographer = async (req, res) => {
   let photographer = req.params.photographer;
-  console.log(photographer);
   try {
     const client = await MongoClient(MONGO_URI, options);
     await client.connect();
@@ -147,10 +146,7 @@ const getBooksByPhotographer = async (req, res) => {
       .collection("catalogue")
       .find({ photographer })
       .toArray();
-    // assert(1, result.matchedCount);
-    console.log(result);
     client.close();
-
     res.status(201).json({ status: 201, data: result });
   } catch (err) {
     res.status(500).json({ status: 500, message: "Error" });
