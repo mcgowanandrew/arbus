@@ -38,8 +38,6 @@ app.use(function (req, res, next) {
 
 app.use(morgan("tiny"));
 app.use(bodyParser.json({ limit: "25mb", extended: true }));
-// app.use(express.json({limit: '25mb', extended: true}));
-// app.use(express.urlencoded({limit: '25mb', extended: true}));
 app.use(express.urlencoded({ extended: true }));
 app.use("/", express.static(__dirname + "/"));
 
