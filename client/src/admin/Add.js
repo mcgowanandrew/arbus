@@ -70,10 +70,9 @@ const history = useHistory()  // eslint-disable-next-line
       history.go(0);
   };
 
-  const viewCollection=()=>{
+  const viewCollection = () =>{
     history.push("/catalogue/collection")
     window.scrollTo(0, 0)
-
   }
 
   const convertBase64 = (file) => {
@@ -117,10 +116,9 @@ const history = useHistory()  // eslint-disable-next-line
     setAddBook({ ...addBook, imageFour: base64 });
   };
 
-  const xHandler=()=>{
+  const xHandler = () =>{
     setSuccessIsOpen(false)
     handleClear()
-  
   }
 
   return (
@@ -281,6 +279,7 @@ const history = useHistory()  // eslint-disable-next-line
     </BigWrap>
   );
 };
+
 const X = styled.div`
   border: 2px solid #000;
   padding: 10px 8px;
